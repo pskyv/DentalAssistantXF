@@ -1,11 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DentalAssistantXF.Views.MainPage"
-             Title="{Binding Title}">
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            x:Class="DentalAssistantXF.Views.MainPage"
+            Title="Home">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <TabbedPage.Children>
+        <ContentPage Title="Dashboard"
+                     Icon="ic_dashboard">
+            <Grid>
+                <Label 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Dashboard"/>
+            </Grid>
+        </ContentPage>
+        <ContentPage Title="Patients"
+                     Icon="ic_patients">
+            <Grid>
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Text="Patients" />
+            </Grid>
+        </ContentPage>
+        <ContentPage Title="Scheduler"
+                     Icon="ic_scheduler">
+            <Grid>
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Text="Scheduler" />
+            </Grid>
+        </ContentPage>
+    </TabbedPage.Children>
 
-</ContentPage>
+</TabbedPage>

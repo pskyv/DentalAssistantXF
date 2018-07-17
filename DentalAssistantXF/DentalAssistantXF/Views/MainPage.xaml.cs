@@ -7,8 +7,8 @@ using Xamarin.Forms;
 
 namespace DentalAssistantXF.Views
 {
-	public partial class MainPage : ContentPage
-	{
+	public partial class MainPage : Xamarin.Forms.TabbedPage
+    {
 		public MainPage ()
 		{
 			InitializeComponent ();
