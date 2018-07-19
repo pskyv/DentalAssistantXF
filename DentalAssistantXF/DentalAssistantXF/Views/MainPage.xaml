@@ -3,8 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            x:Class="DentalAssistantXF.Views.MainPage"
-            Title="Home">
+            x:Class="DentalAssistantXF.Views.MainPage">
 
     <TabbedPage.Children>
         <ContentPage Title="Dashboard"

@@ -24,7 +24,8 @@ namespace DentalAssistantXF
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/PatientProfilePage");
+            //await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -32,6 +33,7 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<NavigationMenuPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<PatientProfilePage>();
         }
     }
 }

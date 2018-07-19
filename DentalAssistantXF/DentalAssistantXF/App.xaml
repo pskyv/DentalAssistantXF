@@ -5,7 +5,27 @@
              x:Class="DentalAssistantXF.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <ResourceDictionary >
+            <Color x:Key="primary">#607D8B</Color>
+            <Color x:Key="primaryDark">#455A64</Color>
+            <Color x:Key="primaryLight">#BDBDBD</Color>
+            <Color x:Key="accent">#CDDC39</Color>
+            <Color x:Key="primaryText">#212121</Color>
+            <Color x:Key="secondaryText">#757575</Color>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#CFD8DC" />
+            </Style>
+            <Style TargetType="BoxView">
+                <Setter Property="Color" Value="#BDBDBD" />
+                <Setter Property="HeightRequest" Value="0.5" />
+            </Style>
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="#6ff9ff" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#212121" />
+            </Style>
+        </ResourceDictionary>
 
-	</Application.Resources>
+    </Application.Resources>
 </prism:PrismApplication>

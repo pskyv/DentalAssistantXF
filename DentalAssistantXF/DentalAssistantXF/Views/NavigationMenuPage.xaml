@@ -11,7 +11,7 @@
             <x:Arguments>
                 <ContentPage NavigationPage.HasNavigationBar="False">
                     <StackLayout>
-                        <StackLayout Padding="10,20">
+                        <StackLayout Padding="10,20" BackgroundColor="{StaticResource primaryLight}">
                             <!--<Image Source="logoSingle.png" HorizontalOptions="Start" />-->
                             <Label Text="Dental Assistant" FontSize="Large" HorizontalOptions="Start" />
                         </StackLayout>

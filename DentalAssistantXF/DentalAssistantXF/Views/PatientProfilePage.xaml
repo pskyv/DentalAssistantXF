@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.PatientProfilePage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="AUTO" />
+            </Grid.RowDefinitions>
+
+            <!--  header background  -->
+            <Image Aspect="AspectFill" Source="dentistBackground.png" Opacity="0.5" />
+
+            <!--  profile image  -->
+            <Image HeightRequest="100" HorizontalOptions="Center" Source="profilePic.png" TranslationY="50" VerticalOptions="End" WidthRequest="100" />
+
+            <!--  Profile Name  -->
+            <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
+                <Label Text="Clementine" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                <Label Margin="0,-5" Text="Hipster Coffee Drinker" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+            </StackLayout>
+
+            <!--  Social Stats Section  -->
+            <Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout>
+                    <Label Text="33" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                    <Label Text="Likes" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="1">
+                    <Label Text="94" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                    <Label Text="Following" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                </StackLayout>
+
+                <StackLayout Grid.Column="2">
+                    <Label Text="150" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                    <Label Text="Followers" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                </StackLayout>
+            </Grid>
+
+            <!--  profile description  -->
+            <Label Margin="20,0" Grid.Row="3" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada ultricies arcu nec egestas. Nam porta fermentum aliquam. Nullam tincidunt odio purus." />
+
+            <!--  follow button  -->
+            <Button Grid.Row="4" Margin="20" Text="Follow" />
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
