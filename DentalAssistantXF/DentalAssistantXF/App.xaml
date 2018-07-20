@@ -6,12 +6,13 @@
 	<Application.Resources>
 
         <ResourceDictionary >
-            <Color x:Key="primary">#607D8B</Color>
-            <Color x:Key="primaryDark">#455A64</Color>
-            <Color x:Key="primaryLight">#BDBDBD</Color>
+            <Color x:Key="primary">#00BCD4</Color>
+            <Color x:Key="primaryDark">#0097A7</Color>
+            <Color x:Key="primaryLight">#B2EBF2</Color>
             <Color x:Key="accent">#CDDC39</Color>
             <Color x:Key="primaryText">#212121</Color>
             <Color x:Key="secondaryText">#757575</Color>
+            <Color x:Key="divider">#BDBDBD</Color>
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="#CFD8DC" />
             </Style>
