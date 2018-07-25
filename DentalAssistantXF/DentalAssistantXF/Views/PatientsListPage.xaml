@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl" 
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -22,37 +23,51 @@
             </SearchBar.Behaviors>
         </SearchBar>
 
-        <ListView SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ListView SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
                   ItemsSource="{Binding Patients}"
                   RowHeight="60"
-                  Margin="0,15,0,0">
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding NavigateToPatientDetailsCommand}"/>
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="20,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                  Margin="0,15,0,0"
+                  AbsoluteLayout.LayoutFlags="All"
+			      AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding NavigateToPatientDetailsCommand}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="20,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <Image Source="avatar" />
-                            <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
-                                <Label Text="{Binding FullName}" TextColor="{StaticResource primaryText}" FontSize="14" />
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="ic_phone_black_18dp" />
-                                    <Label Text="{Binding Phone}" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                                <Image Source="avatar" />
+                                <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
+                                    <Label Text="{Binding FullName}" TextColor="{StaticResource primaryText}" FontSize="14" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="ic_phone_black_18dp" />
+                                        <Label Text="{Binding Phone}" Style="{StaticResource SecondaryTextLabel}" />
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                            <Image Grid.Column="2" Source="{Binding HasOpenCase, Converter={StaticResource BooleanToImageConverter}}" VerticalOptions="Center" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                <Image Grid.Column="2" Source="{Binding HasOpenCase, Converter={StaticResource BooleanToImageConverter}}" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <fab:FloatingActionButtonView
+				ImageName="ic_add_white_24dp"
+				ColorNormal="{StaticResource primary}"
+				ColorPressed="{StaticResource primaryDark}"
+				ColorRipple="{StaticResource primaryDark}"
+				IsVisible="True"
+				AbsoluteLayout.LayoutFlags="PositionProportional"
+				AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+                Command="{Binding AddPatientCommand}"/>
+        </AbsoluteLayout>
     </StackLayout>
 
 </ContentPage>

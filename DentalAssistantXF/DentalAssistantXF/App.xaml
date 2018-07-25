@@ -13,6 +13,7 @@
             <Color x:Key="primaryText">#212121</Color>
             <Color x:Key="secondaryText">#757575</Color>
             <Color x:Key="divider">#BDBDBD</Color>
+            
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="#CFD8DC" />
             </Style>
@@ -23,8 +24,15 @@
             <Style TargetType="ActivityIndicator">
                 <Setter Property="Color" Value="#6ff9ff" />
             </Style>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="#212121" />
+            
+            <Style x:Key="SecondaryTextLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#757575" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="Strip" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#eeeeee" />
+                <Setter Property="Padding" Value="15,8" />
             </Style>
         </ResourceDictionary>
 

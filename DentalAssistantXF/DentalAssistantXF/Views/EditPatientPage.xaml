@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.EditPatientPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_check_white_24dp" Command="{Binding SavePatientCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="0,10" HorizontalOptions="Center" Spacing="0">
+                <Image Source="avatar" HeightRequest="120" />
+                <Button Image="ic_camera_black_24dp" 
+                        BackgroundColor="Transparent" 
+                        VerticalOptions="EndAndExpand" 
+                        HeightRequest="34" 
+                        WidthRequest="34"
+                        Command="{Binding TakePhotoCommand}"/>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource Strip}">
+                <Label Text="Personal information" />
+            </StackLayout>
+            <StackLayout Padding="15,0">
+                <Entry Text="{Binding Patient.FirstName}" Placeholder="First name..." />
+                <Entry Text="{Binding Patient.LastName}" Placeholder="Last name..." />
+                <!--<DatePicker Date="{Binding Patient.BirthDate}" />-->
+                <Entry Text="{Binding Patient.Occupation}" Placeholder="Occupation..." />
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource Strip}">
+                <Label Text="Contact information" />
+            </StackLayout>
+            <StackLayout Padding="15,0">
+                <Entry Text="{Binding Patient.Phone}" Placeholder="Phone..." />
+                <Entry Text="{Binding Patient.Email}" Placeholder="Email..." />
+                <Entry Text="{Binding Patient.Address}" Placeholder="Address..." />
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource Strip}">
+                <Label Text="Notes" />
+            </StackLayout>
+            <StackLayout Padding="15,0">
+                <Editor Text="{Binding Patient.Notes}" AutoSize="TextChanges" />
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

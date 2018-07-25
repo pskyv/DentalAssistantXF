@@ -4,6 +4,7 @@
             xmlns:views="clr-namespace:DentalAssistantXF.Views"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarBackgroundColor="#eeeeee"
             x:Class="DentalAssistantXF.Views.MainPage">
 
     <TabbedPage.Children>

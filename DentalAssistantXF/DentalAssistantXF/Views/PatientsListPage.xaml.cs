@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using DentalAssistantXF.Utils;
+using Xamarin.Forms;
 
 namespace DentalAssistantXF.Views
 {
@@ -6,7 +7,13 @@ namespace DentalAssistantXF.Views
     {
         public PatientsListPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MessagingCenter.Send(this, Constants.OnPatientsListPageAppearingMsg);
         }
     }
 }

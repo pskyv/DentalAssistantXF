@@ -13,6 +13,8 @@ namespace DentalAssistantXF.Models
         public string LastName { get; set; }
 
         public string FullName => LastName + " " + FirstName;
+
+        public string Occupation { get; set; }
         
         public string BirthDate { get; set; }
 
@@ -24,12 +26,12 @@ namespace DentalAssistantXF.Models
 
         public string Notes { get; set; }
 
-        //public byte[] ProfilePhoto { get; set; }
+        public byte[] ProfilePhoto { get; set; }
 
-        //public ImageSource ProfilePhotoSrc
-        //{
-        //    get { return ProfilePhoto == null? ImageSource.FromStream(() => new MemoryStream(ProfilePhoto)): null; } 
-        //}
+        public ImageSource ProfilePhotoSrc
+        {
+            get { return ProfilePhoto == null ? ImageSource.FromStream(() => new MemoryStream(ProfilePhoto)) : null; }
+        }
 
         public bool HasOpenCase { get; }
     }

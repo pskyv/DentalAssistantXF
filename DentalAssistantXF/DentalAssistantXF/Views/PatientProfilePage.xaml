@@ -42,8 +42,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="Ιστορικο" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
-                <Button Grid.Column="1" Text="Οικονομικα" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
+                <Button Text="History" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
+                <Button Grid.Column="1" Text="Financial" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
             </Grid>
 
             <!--  Aggregates  -->
@@ -66,38 +66,38 @@
 
             <!--  profile description  -->
             <StackLayout Grid.Row="4">
-                <StackLayout Margin="0,20,0,0" Padding="15,8" BackgroundColor="#eeeeee">
-                    <Label Text="Προσωπικά στοιχεία" />
+                <StackLayout Margin="0,20,0,0" Style="{StaticResource Strip}">
+                    <Label Text="Personal information" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_calendar_black_18dp" />
-                    <Label Text="12/5/1974" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="12/5/1974" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_briefcase_black_18dp" />
-                    <Label Text="Ιδιωτική υπάλληλος" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="Ιδιωτική υπάλληλος" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
 
-                <StackLayout Margin="0,5,0,0" Padding="15,8" BackgroundColor="#eeeeee">
-                    <Label Text="Στοιχεία επικοινωνίας" />
+                <StackLayout Margin="0,5,0,0" Style="{StaticResource Strip}">
+                    <Label Text="Contact information" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_phone_black_18dp" />
-                    <Label Text="6973554870" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="6973554870" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_email_black_18dp" />
-                    <Label Text="pandroniki@gmail.com" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="pandroniki@gmail.com" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0,0,10">
                     <Image Source="ic_map_marker_black_18dp" />
-                    <Label Text="Ιουστινιανού 22" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="Ιουστινιανού 22" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
-                <StackLayout Padding="15,8" BackgroundColor="#eeeeee">
-                    <Label Text="Παρατηρήσεις" />
+                <StackLayout Style="{StaticResource Strip}">
+                    <Label Text="Notes" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0,0,15">
-                    <Label Text="Θα λείπει από 1η Αυγούστου μέχρι 16. Συνήθως πληρώνει τέλος του μήνα" TextColor="{StaticResource secondaryText}" FontSize="12" VerticalOptions="Center" />
+                    <Label Text="Θα λείπει από 1η Αυγούστου μέχρι 16. Συνήθως πληρώνει τέλος του μήνα" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
             </StackLayout>
 

@@ -6,5 +6,7 @@ namespace DentalAssistantXF.Utils
         public const string MainPageCaption = "Home";
 
         public const string SettingsPageCaption = "Settings";
+
+        public const string OnPatientsListPageAppearingMsg = "OnPatientsListPageAppearingMsg";
     }
 }
