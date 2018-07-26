@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using ImageCircle.Forms.Plugin.Droid;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 
@@ -17,9 +20,19 @@ namespace DentalAssistantXF.Droid
 
             base.OnCreate(bundle);
 
+            //CrossCurrentActivity.Current.Init(this, bundle);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            UserDialogs.Init(this);
             ImageCircleRenderer.Init();
+            
             LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

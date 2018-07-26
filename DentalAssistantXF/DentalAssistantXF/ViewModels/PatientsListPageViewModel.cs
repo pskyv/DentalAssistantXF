@@ -1,4 +1,5 @@
 ﻿using DentalAssistantXF.Models;
+using DentalAssistantXF.Services;
 using DentalAssistantXF.Utils;
 using DentalAssistantXF.Views;
 using Prism.Commands;
@@ -16,20 +17,23 @@ namespace DentalAssistantXF.ViewModels
 {
     public class PatientsListPageViewModel : BindableBase
     {
-        public INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
+        private readonly IDatabaseService _databaseService;
         private Patient _selectedPatient;
         private string _filterText;
 
-        public PatientsListPageViewModel(INavigationService navigationService)
+        public PatientsListPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
         {
             _navigationService = navigationService;
+            _databaseService = databaseService;
 
             Patients = new ObservableCollection<Patient>();
             AddPatientCommand = new DelegateCommand(AddPatient);
+            NavigateToPatientDetailsCommand = new DelegateCommand(NavigateToPatientDetailsAsync);
             FilterPatientsCommand = new DelegateCommand(FilterPatients);
-            GetPatients();
-            //MessagingCenter.Subscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg, (sender) => { GetPatients(); });
-        }
+            //GetPatients();
+            MessagingCenter.Subscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg, (sender) => { GetPatientsAsync(); });
+        }        
 
         public Patient SelectedPatient
         {
@@ -45,11 +49,44 @@ namespace DentalAssistantXF.ViewModels
             set { SetProperty(ref _filterText, value); }
         }
 
-        public DelegateCommand NavigateToPatientDetailsCommand => new DelegateCommand(async () => { await _navigationService.NavigateAsync("PatientProfilePage"); });
+        public DelegateCommand NavigateToPatientDetailsCommand { get; }
 
         public DelegateCommand FilterPatientsCommand { get; }
 
         public DelegateCommand AddPatientCommand { get; }
+
+        private async void GetPatientsAsync()
+        {
+            var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
+            Patients.Clear();
+            foreach (var patient in patients)
+            {
+                Patients.Add(patient);
+            }
+        }
+
+        private async void NavigateToPatientDetailsAsync()
+        {
+            if(SelectedPatient != null)
+            {
+                var navParams = new NavigationParameters();
+                navParams.Add("PatientId", SelectedPatient.Id);
+                await _navigationService.NavigateAsync("PatientProfilePage", navParams);
+            }
+        }        
+
+        private void FilterPatients()
+        {
+
+        }
+
+        private async void AddPatient()
+        {
+            var patient = new Patient();
+            var navParams = new NavigationParameters();
+            navParams.Add("Patient", patient);
+            await _navigationService.NavigateAsync("EditPatientPage", navParams);
+        }
 
         private void GetPatients()
         {
@@ -69,19 +106,6 @@ namespace DentalAssistantXF.ViewModels
             {
                 Patients.Add(patient);
             }
-        }
-
-        private void FilterPatients()
-        {
-
-        }
-
-        private async void AddPatient()
-        {
-            var patient = new Patient();
-            var navParams = new NavigationParameters();
-            navParams.Add("Patient", patient);
-            await _navigationService.NavigateAsync("EditPatientPage", navParams);
         }
     }
 }

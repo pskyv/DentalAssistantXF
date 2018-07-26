@@ -25,15 +25,25 @@
             <Image Aspect="AspectFill" Source="dentistBackground.png" Opacity="0.5" HeightRequest="200" />
 
             <!--  profile image  -->
-            <!--<controls:CircleImage HeightRequest="120" HorizontalOptions="Center" Aspect="AspectFill" Source="profilePic.jpg" TranslationY="50" VerticalOptions="End" WidthRequest="120" />-->
-            <Image HeightRequest="120" HorizontalOptions="Center" Source="ProfilePic2.png" TranslationY="50" VerticalOptions="End" WidthRequest="120" />
+            <controls:CircleImage HeightRequest="120" HorizontalOptions="Center" Aspect="AspectFill" Source="avatar" TranslationY="50" VerticalOptions="End" WidthRequest="120" />
+            <!--<Image HeightRequest="120" HorizontalOptions="Center" Source="ProfilePic2.png" TranslationY="50" VerticalOptions="End" WidthRequest="120" />-->
 
-            <Button Image="ic_arrow_left_white_24dp" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="60" BackgroundColor="Transparent" Command="{Binding NavigateBackCommand}" />
-            <Button Image="ic_pencil_white_18dp.png" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="60" BackgroundColor="Transparent" />
+            <Button Image="ic_arrow_left_white_24dp" 
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    WidthRequest="60" 
+                    BackgroundColor="Transparent" 
+                    Command="{Binding NavigateBackCommand}" />
+            <Button Image="ic_pencil_white_18dp.png" 
+                    VerticalOptions="Start" 
+                    HorizontalOptions="End" 
+                    WidthRequest="60" 
+                    BackgroundColor="Transparent" 
+                    Command="{Binding EditPatientCommand}" />
 
             <!--  Profile Name  -->
             <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
-                <Label Text="Παπαδημητρίου Ανδρονίκη" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                <Label Text="{Binding CurrentPatient.FullName}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
             </StackLayout>
 
             <Grid Grid.Row="2" Margin="0,20">
@@ -42,8 +52,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="History" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
-                <Button Grid.Column="1" Text="Financial" CornerRadius="10" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
+                <Button Text="History" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
+                <Button Grid.Column="1" Text="Financial" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
             </Grid>
 
             <!--  Aggregates  -->
@@ -55,12 +65,12 @@
 
                 <StackLayout Spacing="0">
                     <Label Text="3" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
-                    <Label Text="Επισκέψεις" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                    <Label Text="Cases" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
                     <Label Text="50" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
-                    <Label Text="Υπόλοιπο" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                    <Label Text="Balance" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
             </Grid>
 
@@ -71,11 +81,11 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_calendar_black_18dp" />
-                    <Label Text="12/5/1974" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.BirthDate, StringFormat='{}{0:dd/MM/yyyy}'}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_briefcase_black_18dp" />
-                    <Label Text="Ιδιωτική υπάλληλος" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.Occupation}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
 
                 <StackLayout Margin="0,5,0,0" Style="{StaticResource Strip}">
@@ -83,21 +93,21 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_phone_black_18dp" />
-                    <Label Text="6973554870" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.Phone}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0">
                     <Image Source="ic_email_black_18dp" />
-                    <Label Text="pandroniki@gmail.com" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.Email}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0,0,10">
                     <Image Source="ic_map_marker_black_18dp" />
-                    <Label Text="Ιουστινιανού 22" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.Address}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource Strip}">
                     <Label Text="Notes" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="15,0,0,15">
-                    <Label Text="Θα λείπει από 1η Αυγούστου μέχρι 16. Συνήθως πληρώνει τέλος του μήνα" Style="{StaticResource SecondaryTextLabel}" />
+                    <Label Text="{Binding CurrentPatient.Notes}" Style="{StaticResource SecondaryTextLabel}" />
                 </StackLayout>
             </StackLayout>
 

@@ -5,6 +5,7 @@ using DentalAssistantXF.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
+using DentalAssistantXF.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DentalAssistantXF
@@ -39,6 +40,8 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<PatientProfilePage>();
             containerRegistry.RegisterForNavigation<PatientsListPage>();
             containerRegistry.RegisterForNavigation<EditPatientPage>();
+
+            containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
         }
     }
 }
