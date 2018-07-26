@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using ImageCircle.Forms.Plugin.Droid;
 using Plugin.CurrentActivity;
 using Prism;
@@ -10,11 +11,16 @@ using Prism.Ioc;
 
 namespace DentalAssistantXF.Droid
 {
-    [Activity(Label = "DentalAssistantXF", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Dentist Assist", Icon = "@mipmap/ic_launcher", Theme = "@style/splashscreen", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
+            base.Window.RequestFeature(WindowFeatures.ActionBar);
+            // Name of the MainActivity theme you had there before.
+            // Or you can use global::Android.Resource.Style.ThemeHoloLight
+            base.SetTheme(Resource.Style.MainTheme);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

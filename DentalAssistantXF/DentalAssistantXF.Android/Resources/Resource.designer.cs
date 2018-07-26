@@ -4590,26 +4590,26 @@ namespace DentalAssistantXF.Droid
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f02014e
-			public const int avd_hide_password_1 = 2130837838;
-			
 			// aapt resource value: 0x7f02014f
-			public const int avd_hide_password_2 = 2130837839;
+			public const int avd_hide_password_1 = 2130837839;
 			
 			// aapt resource value: 0x7f020150
-			public const int avd_hide_password_3 = 2130837840;
+			public const int avd_hide_password_2 = 2130837840;
+			
+			// aapt resource value: 0x7f020151
+			public const int avd_hide_password_3 = 2130837841;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f020151
-			public const int avd_show_password_1 = 2130837841;
-			
 			// aapt resource value: 0x7f020152
-			public const int avd_show_password_2 = 2130837842;
+			public const int avd_show_password_1 = 2130837842;
 			
 			// aapt resource value: 0x7f020153
-			public const int avd_show_password_3 = 2130837843;
+			public const int avd_show_password_2 = 2130837843;
+			
+			// aapt resource value: 0x7f020154
+			public const int avd_show_password_3 = 2130837844;
 			
 			// aapt resource value: 0x7f020056
 			public const int dentistBackground = 2130837590;
@@ -5325,11 +5325,11 @@ namespace DentalAssistantXF.Droid
 			// aapt resource value: 0x7f020143
 			public const int notification_icon_background = 2130837827;
 			
-			// aapt resource value: 0x7f02014c
-			public const int notification_template_icon_bg = 2130837836;
-			
 			// aapt resource value: 0x7f02014d
-			public const int notification_template_icon_low_bg = 2130837837;
+			public const int notification_template_icon_bg = 2130837837;
+			
+			// aapt resource value: 0x7f02014e
+			public const int notification_template_icon_low_bg = 2130837838;
 			
 			// aapt resource value: 0x7f020144
 			public const int notification_tile_bg = 2130837828;
@@ -5350,10 +5350,13 @@ namespace DentalAssistantXF.Droid
 			public const int roundedbgdark = 2130837833;
 			
 			// aapt resource value: 0x7f02014a
-			public const int tooltip_frame_dark = 2130837834;
+			public const int splash = 2130837834;
 			
 			// aapt resource value: 0x7f02014b
-			public const int tooltip_frame_light = 2130837835;
+			public const int tooltip_frame_dark = 2130837835;
+			
+			// aapt resource value: 0x7f02014c
+			public const int tooltip_frame_light = 2130837836;
 			
 			static Drawable()
 			{
@@ -6535,8 +6538,8 @@ namespace DentalAssistantXF.Droid
 			// aapt resource value: 0x7f0d016e
 			public const int Animation_Design_BottomSheetDialog = 2131558766;
 			
-			// aapt resource value: 0x7f0d0191
-			public const int AppCompatDialogStyle = 2131558801;
+			// aapt resource value: 0x7f0d0192
+			public const int AppCompatDialogStyle = 2131558802;
 			
 			// aapt resource value: 0x7f0d00a9
 			public const int Base_AlertDialog_AppCompat = 2131558569;
@@ -7722,6 +7725,9 @@ namespace DentalAssistantXF.Droid
 			
 			// aapt resource value: 0x7f0d000a
 			public const int Widget_MediaRouter_MediaRouteButton = 2131558410;
+			
+			// aapt resource value: 0x7f0d0191
+			public const int splashscreen = 2131558801;
 			
 			static Style()
 			{
