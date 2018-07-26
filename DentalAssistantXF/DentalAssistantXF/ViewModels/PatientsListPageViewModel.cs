@@ -20,6 +20,7 @@ namespace DentalAssistantXF.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
         private Patient _selectedPatient;
+        private List<Patient> _patients = new List<Patient>();
         private string _filterText;
 
         public PatientsListPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
@@ -46,8 +47,12 @@ namespace DentalAssistantXF.ViewModels
         public string FilterText
         {
             get { return _filterText; }
-            set { SetProperty(ref _filterText, value); }
-        }
+            set
+            {
+                SetProperty(ref _filterText, value);
+                CheckIfCleared();
+            }
+        }        
 
         public DelegateCommand NavigateToPatientDetailsCommand { get; }
 
@@ -57,9 +62,10 @@ namespace DentalAssistantXF.ViewModels
 
         private async void GetPatientsAsync()
         {
-            var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
+            _patients.Clear();
+            _patients = (await _databaseService.DentalAssistantDB.GetPatientsAsync()).ToList();
             Patients.Clear();
-            foreach (var patient in patients)
+            foreach (var patient in _patients)
             {
                 Patients.Add(patient);
             }
@@ -77,12 +83,30 @@ namespace DentalAssistantXF.ViewModels
 
         private void FilterPatients()
         {
+            if(string.IsNullOrEmpty(FilterText))
+            {
+                return;
+            }
 
+            _patients = Patients.Where(p => p.FullName.StartsWith(FilterText, true, null)).ToList();
+            Patients.Clear();
+            foreach (var patient in _patients)
+            {
+                Patients.Add(patient);
+            }
+        }
+
+        private void CheckIfCleared()
+        {
+            if (string.IsNullOrEmpty(FilterText))
+            {
+                GetPatientsAsync();
+            }
         }
 
         private async void AddPatient()
         {
-            var patient = new Patient();
+            var patient = new Patient() { BirthDate = DateTime.Today };
             var navParams = new NavigationParameters();
             navParams.Add("Patient", patient);
             await _navigationService.NavigateAsync("EditPatientPage", navParams);
