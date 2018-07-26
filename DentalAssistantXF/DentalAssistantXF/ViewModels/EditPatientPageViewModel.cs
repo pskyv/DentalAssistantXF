@@ -7,6 +7,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -95,6 +96,15 @@ namespace DentalAssistantXF.ViewModels
                 return;
 
             ProfilePhotoSrc = ImageSource.FromStream(() => mediaFile.GetStream());
+
+            byte[] photoBytes;
+            var ms = mediaFile.GetStream();
+            using (BinaryReader br = new BinaryReader(ms))
+            {
+                photoBytes = br.ReadBytes((int)ms.Length);
+            }
+
+            Patient.ProfilePhoto = photoBytes;
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)
@@ -102,6 +112,7 @@ namespace DentalAssistantXF.ViewModels
             if (parameters != null)
             {
                 Patient = (Patient)parameters["Patient"];
+                ProfilePhotoSrc = Patient.ProfilePhotoSrc;
                 Title = Patient.Id < 1 ? "Add patient" : "Edit patient";
             }
         }

@@ -34,7 +34,7 @@ namespace DentalAssistantXF.Models
         [Ignore]
         public ImageSource ProfilePhotoSrc
         {
-            get { return ProfilePhoto != null ? ImageSource.FromStream(() => new MemoryStream(ProfilePhoto)) : null; }
+            get { return ProfilePhoto != null ? ImageSource.FromStream(() => new MemoryStream(ProfilePhoto)) : ImageSource.FromFile("avatar"); }
         }
 
         [Ignore]

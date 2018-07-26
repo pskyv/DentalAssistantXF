@@ -20,7 +20,8 @@ namespace DentalAssistantXF.Droid
 
             base.OnCreate(bundle);
 
-            //CrossCurrentActivity.Current.Init(this, bundle);
+            CrossCurrentActivity.Current.Init(this, bundle);
+            //CrossCurrentActivity.Current.Activity = this;
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 

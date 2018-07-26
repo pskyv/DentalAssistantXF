@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl" 
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -43,7 +44,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="avatar" />
+                                <controls:CircleImage Source="{Binding ProfilePhotoSrc}" Aspect="Fill" HeightRequest="40" WidthRequest="40" />
                                 <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0">
                                     <Label Text="{Binding FullName}" TextColor="{StaticResource primaryText}" FontSize="14" />
                                     <StackLayout Orientation="Horizontal">
