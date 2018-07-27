@@ -13,6 +13,7 @@ namespace XFPrismDemo.LocalDBs
         {
             _connection = connection;
             _connection.CreateTableAsync<Patient>().Wait();
+            _connection.CreateTableAsync<PatientDentalProcedure>().Wait();
         }
 
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
@@ -38,6 +39,11 @@ namespace XFPrismDemo.LocalDBs
         public async Task<int> DeletePatientAsync(Patient patient)
         {
             return await _connection.DeleteAsync(patient);
+        }
+
+        public async Task<List<PatientDentalProcedure>> GetPatientDentalProcedures(int patientId)
+        {
+            return await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where PatientId =?", patientId);
         }
     }
 }

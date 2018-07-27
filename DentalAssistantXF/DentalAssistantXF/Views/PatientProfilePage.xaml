@@ -39,7 +39,8 @@
                     HorizontalOptions="End" 
                     WidthRequest="60" 
                     BackgroundColor="Transparent" 
-                    Command="{Binding EditPatientCommand}" />
+                    Command="{Binding EditPatientCommand}"
+                    CommandParameter="EditPatientPage"/>
 
             <!--  Profile Name  -->
             <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
@@ -52,8 +53,25 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="History" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
-                <Button Grid.Column="1" Text="Financial" CornerRadius="20" HorizontalOptions="Center" BackgroundColor="{StaticResource primary}" TextColor="White" WidthRequest="120" FontSize="9" HeightRequest="30" />
+                <Button Text="History" 
+                        CornerRadius="20" 
+                        HorizontalOptions="Center" 
+                        BackgroundColor="{StaticResource primary}" 
+                        TextColor="White" 
+                        WidthRequest="120" 
+                        FontSize="9" 
+                        HeightRequest="30" 
+                        Command="{Binding NavigateToPatientHistoryCommand}" 
+                        CommandParameter="PatientHistoryPage" />
+                <Button Grid.Column="1" 
+                        Text="Financial" 
+                        CornerRadius="20" 
+                        HorizontalOptions="Center" 
+                        BackgroundColor="{StaticResource primary}" 
+                        TextColor="White" 
+                        WidthRequest="120" 
+                        FontSize="9" 
+                        HeightRequest="30" />
             </Grid>
 
             <!--  Aggregates  -->

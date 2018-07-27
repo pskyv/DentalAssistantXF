@@ -6,4 +6,23 @@ namespace DentalAssistantXF.Models
         Success,
         Error
     }
+
+    public enum DentalProcedureType
+    {
+        Cleaning,
+        Whitening,
+        Filling,
+        Root_canal,
+        Cap,
+        Bridge,
+        Denture,
+        Implant,
+        Extraction
+    }
+
+    public enum DentalProcedureStatus
+    {
+        InProgress,
+        Completed
+    }
 }
