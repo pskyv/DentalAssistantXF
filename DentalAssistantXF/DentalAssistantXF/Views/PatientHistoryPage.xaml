@@ -5,7 +5,9 @@
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl" 
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="DentalAssistantXF.Views.PatientHistoryPage">
+             x:Class="DentalAssistantXF.Views.PatientHistoryPage"
+             Title="Patient history"
+             x:Name="PatientTimeline">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -13,53 +15,49 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <ListView x:Name="timelineListView"
-                  ItemTapped="timelineListView_ItemTapped"
+    <Grid>
+        <!--<Image Aspect="AspectFit" Source="dentistBackground" Opacity="0.1" />-->
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ListView x:Name="timelineListView"
                   ItemsSource="{Binding PatientDentalProcedures}"
                   RowHeight="75"
                   SeparatorVisibility="None"
                   AbsoluteLayout.LayoutFlags="All"
 			      AbsoluteLayout.LayoutBounds="0,0,1,1">
 
-            <ListView.Header>
-                <StackLayout Padding="20,40,0,30">
-                    <Label Text="CurrentPatient.FullName" FontSize="28" />
-                </StackLayout>
-            </ListView.Header>
+                <ListView.Header>
+                    <StackLayout Spacing="0" Margin="20,10,20,20">
+                        <Label Text="{Binding Path=BindingContext.CurrentPatient.FullName, Source={x:Reference PatientTimeline}}" FontSize="28" />
+                        <Label Text="Timeline of dental procedures" TextColor="{StaticResource secondaryText}" FontSize="14" />
+                    </StackLayout>
+                </ListView.Header>
 
-            <!--<ListView.Footer>
-            <Grid RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="64" />
-                    <RowDefinition Height="100" />
-                </Grid.RowDefinitions>
-                <Image Grid.RowSpan="2" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Start" Source="YogaImage.png" />
-                <Image Aspect="Fill" Grid.RowSpan="2" HorizontalOptions="Fill" Source="FadeToWhite.png" />
-            </Grid>
-        </ListView.Footer>-->
+                <ListView.Footer>
+                    <Image Aspect="AspectFill" Source="dentistBackground" Opacity="0.1" />
+                </ListView.Footer>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid ColumnSpacing="0" RowSpacing="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="0" RowSpacing="0" Padding="20,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                            <Label HorizontalOptions="Center" Style="{StaticResource ClassTimeLabel}" Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                <Label HorizontalOptions="Center" Style="{StaticResource ClassTimeLabel}" Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
 
-                            <Label Grid.Column="2" Margin="20,0" Style="{StaticResource ClassNameLabel}" Text="{Binding DentalProcedure}" />
+                                <StackLayout Margin="20,0" Grid.Column="2" Grid.RowSpan="2" Spacing="0" VerticalOptions="StartAndExpand">
+                                    <Label Style="{StaticResource ClassNameLabel}" Text="{Binding DentalProcedure}" />
+                                    <Label Style="{StaticResource ClassInstructorLabel}" Text="{Binding Description}" />
+                                </StackLayout>
 
-                            <Label Grid.Row="1" Grid.Column="2" Margin="20,0" Style="{StaticResource ClassInstructorLabel}" Text="{Binding Notes}" />
-
-                            <BoxView Grid.RowSpan="2"
+                                <BoxView Grid.RowSpan="2"
                                  Grid.Column="1"
                                  BackgroundColor="{StaticResource primary}"
                                  HorizontalOptions="Center"
@@ -67,15 +65,15 @@
                                  VerticalOptions="Fill"
                                  WidthRequest="3" />
 
-                            <Image Grid.Column="1" Source="ic_openCase" />
+                                <Image Grid.Column="1" Source="ic_openCase" VerticalOptions="Start" />
 
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <fab:FloatingActionButtonView
+            <fab:FloatingActionButtonView
 				ImageName="ic_add_white_24dp"
 				ColorNormal="{StaticResource primary}"
 				ColorPressed="{StaticResource primaryDark}"
@@ -83,6 +81,7 @@
 				IsVisible="True"
 				AbsoluteLayout.LayoutFlags="PositionProportional"
 				AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" />
-    </AbsoluteLayout>
+        </AbsoluteLayout>
+    </Grid>
 
 </ContentPage>

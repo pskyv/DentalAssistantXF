@@ -12,9 +12,11 @@ namespace DentalAssistantXF.Models
 
         public DentalProcedureType DentalProcedure { get; set; }
 
+        public string Description { get; set; }
+
         public DentalProcedureStatus Status { get; set; }
 
-        public DateTime StarDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         public string Notes { get; set; }
 

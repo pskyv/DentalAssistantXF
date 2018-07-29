@@ -27,12 +27,63 @@
             
             <Style x:Key="SecondaryTextLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="#757575" />
-                <Setter Property="FontSize" Value="12" />
+                <!--<Setter Property="FontSize" Value="12" />-->
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
             <Style x:Key="Strip" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="#eeeeee" />
                 <Setter Property="Padding" Value="15,8" />
+            </Style>
+
+
+            <Color x:Key="TimelineColor">#E4B6C3</Color>
+            <Color x:Key="HeaderTextColor">#3C3C3C</Color>
+            <Color x:Key="BodyTextColor">#869EAC</Color>
+            <Color x:Key="TimeColor">#A64C79</Color>
+
+            <!--  font families  -->
+            <OnPlatform
+                x:Key="RegularFontFamily"
+                x:TypeArguments="x:String"
+                Android="sans-serif"
+                iOS="HelveticaNeue" />
+            <OnPlatform
+                x:Key="LightFontFamily"
+                x:TypeArguments="x:String"
+                Android="sans-serif-light"
+                iOS="HelveticaNeue-Light" />
+            <OnPlatform
+                x:Key="MediumFontFamily"
+                x:TypeArguments="x:String"
+                Android="sans-serif-medium"
+                iOS="HelveticaNeue-Medium" />
+
+
+
+            <!--  styles  -->
+            <Style x:Key="PageHeaderLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource HeaderTextColor}" />
+                <Setter Property="FontSize" Value="30" />
+            </Style>
+
+            <Style x:Key="SubHeaderLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <Style x:Key="ClassTimeLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TimeColor}" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style x:Key="ClassNameLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource primaryText}" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style x:Key="ClassInstructorLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource secondaryText}" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
         </ResourceDictionary>
 

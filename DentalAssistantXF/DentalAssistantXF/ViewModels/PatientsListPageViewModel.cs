@@ -62,6 +62,7 @@ namespace DentalAssistantXF.ViewModels
 
         private async void GetPatientsAsync()
         {
+            FilterText = string.Empty;
             _patients.Clear();
             _patients = (await _databaseService.DentalAssistantDB.GetPatientsAsync()).ToList();
             Patients.Clear();

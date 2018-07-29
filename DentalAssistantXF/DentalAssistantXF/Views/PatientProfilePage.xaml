@@ -44,7 +44,7 @@
 
             <!--  Profile Name  -->
             <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
-                <Label Text="{Binding CurrentPatient.FullName}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" />
+                <Label Text="{Binding CurrentPatient.FullName}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontSize="Large" />
             </StackLayout>
 
             <Grid Grid.Row="2" Margin="0,20">
@@ -59,8 +59,8 @@
                         BackgroundColor="{StaticResource primary}" 
                         TextColor="White" 
                         WidthRequest="120" 
-                        FontSize="9" 
-                        HeightRequest="30" 
+                        FontSize="12" 
+                        HeightRequest="40" 
                         Command="{Binding NavigateToPatientHistoryCommand}" 
                         CommandParameter="PatientHistoryPage" />
                 <Button Grid.Column="1" 
@@ -70,8 +70,8 @@
                         BackgroundColor="{StaticResource primary}" 
                         TextColor="White" 
                         WidthRequest="120" 
-                        FontSize="9" 
-                        HeightRequest="30" />
+                        FontSize="12" 
+                        HeightRequest="40" />
             </Grid>
 
             <!--  Aggregates  -->

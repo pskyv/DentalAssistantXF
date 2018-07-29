@@ -24,9 +24,9 @@ namespace DentalAssistantXF.ViewModels
             _navigationService = navigationService;
             _databaseService = databaseService;
 
-            MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetPatienDentalOperationsAsync(); });
+            MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetMockProcedures(); }); //{ GetPatienDentalOperationsAsync(); });
 
-            PatientDentalProcedures = new ObservableCollection<PatientDentalProcedure>();
+            PatientDentalProcedures = new ObservableCollection<PatientDentalProcedure>();            
         }        
 
         public Patient CurrentPatient
@@ -41,7 +41,7 @@ namespace DentalAssistantXF.ViewModels
         {
             if(parameters != null)
             {
-                CurrentPatient = (Patient)parameters["patient"];
+                CurrentPatient = (Patient)parameters["Patient"];
             }
         }
 
@@ -54,6 +54,15 @@ namespace DentalAssistantXF.ViewModels
             {
                 PatientDentalProcedures.Add(procedure);
             }
+        }
+
+        private void GetMockProcedures()
+        {
+            PatientDentalProcedures.Clear();
+            PatientDentalProcedures.Add(new PatientDentalProcedure { PatientId = 1, DentalProcedure = DentalProcedureType.Cleaning, Description = "Normal cleaning", StartDate = DateTime.Today });
+            PatientDentalProcedures.Add(new PatientDentalProcedure { PatientId = 1, DentalProcedure = DentalProcedureType.Cap, Description = "A cap for tooth with index 8. Difficult case", StartDate = DateTime.Today });
+            PatientDentalProcedures.Add(new PatientDentalProcedure { PatientId = 1, DentalProcedure = DentalProcedureType.Cleaning, Description = "Normal cleaning", StartDate = DateTime.Today });
+            PatientDentalProcedures.Add(new PatientDentalProcedure { PatientId = 1, DentalProcedure = DentalProcedureType.Filling, Description = "Normal cleaning", StartDate = DateTime.Today, IsLast = true });
         }
     }
 }
