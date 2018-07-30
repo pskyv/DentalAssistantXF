@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.EditPatientHistoryPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cv:IntEnumConverter x:Key="IntEnumConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_check_white_24dp" Command="{Binding SavePatientDentalProcedureCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+
+        <StackLayout Style="{StaticResource Strip}">
+            <Label Text="Dental procedure information" />
+        </StackLayout>
+        <StackLayout Padding="15,0">
+            <StackLayout Orientation="Horizontal">
+                <Picker MinimumWidthRequest="300" HorizontalOptions="StartAndExpand" 
+                        ItemsSource="{Binding DentalProcedureTypes}" 
+                        SelectedIndex="{Binding SelectedDentalProcedureType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Is completed" VerticalOptions="Center" />
+                    <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding PatientDentalProcedure.IsCompleted, Mode=TwoWay}" />
+                </StackLayout>
+            </StackLayout>
+            <Entry Text="{Binding PatientDentalProcedure.Description}" Placeholder="Description..." />
+            <DatePicker Date="{Binding PatientDentalProcedure.StartDate}" Format="dd/MM/yyyy" />
+        </StackLayout>
+
+        <StackLayout Style="{StaticResource Strip}">
+            <Label Text="Notes" />
+        </StackLayout>
+        <StackLayout Padding="15,0">
+            <Editor Text="{Binding PatientDentalProcedure.Notes}" AutoSize="TextChanges" />
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

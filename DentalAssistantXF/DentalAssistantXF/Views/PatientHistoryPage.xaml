@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl" 
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -19,12 +20,15 @@
         <!--<Image Aspect="AspectFit" Source="dentistBackground" Opacity="0.1" />-->
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ListView x:Name="timelineListView"
-                  ItemsSource="{Binding PatientDentalProcedures}"
-                  RowHeight="75"
-                  SeparatorVisibility="None"
-                  AbsoluteLayout.LayoutFlags="All"
-			      AbsoluteLayout.LayoutBounds="0,0,1,1">
-
+                      ItemsSource="{Binding PatientDentalProcedures}"
+                      SelectedItem="{Binding SelectedPatientDentalProcedure, Mode=TwoWay}"
+                      RowHeight="75"
+                      SeparatorVisibility="None"
+                      AbsoluteLayout.LayoutFlags="All"
+			          AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding AddOrEditPatientDentalProcedureCommand}" CommandParameter="Edit"/>
+                </ListView.Behaviors>
                 <ListView.Header>
                     <StackLayout Spacing="0" Margin="20,10,20,20">
                         <Label Text="{Binding Path=BindingContext.CurrentPatient.FullName, Source={x:Reference PatientTimeline}}" FontSize="28" />
@@ -52,7 +56,7 @@
 
                                 <Label HorizontalOptions="Center" Style="{StaticResource ClassTimeLabel}" Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
 
-                                <StackLayout Margin="20,0" Grid.Column="2" Grid.RowSpan="2" Spacing="0" VerticalOptions="StartAndExpand">
+                                <StackLayout Margin="10,0" Grid.Column="2" Grid.RowSpan="2" Spacing="0" VerticalOptions="StartAndExpand">
                                     <Label Style="{StaticResource ClassNameLabel}" Text="{Binding DentalProcedure}" />
                                     <Label Style="{StaticResource ClassInstructorLabel}" Text="{Binding Description}" />
                                 </StackLayout>
@@ -61,7 +65,7 @@
                                  Grid.Column="1"
                                  BackgroundColor="{StaticResource primary}"
                                  HorizontalOptions="Center"
-                                 IsVisible="{Binding IsLast, Converter={StaticResource NotBooleanConverter}}"
+                                 IsVisible="{Binding IsLast, Converter={StaticResource NotBooleanConverter}, Mode=TwoWay}"
                                  VerticalOptions="Fill"
                                  WidthRequest="3" />
 
@@ -79,6 +83,8 @@
 				ColorPressed="{StaticResource primaryDark}"
 				ColorRipple="{StaticResource primaryDark}"
 				IsVisible="True"
+                Command="{Binding AddOrEditPatientDentalProcedureCommand}"
+                CommandParameter="Add"
 				AbsoluteLayout.LayoutFlags="PositionProportional"
 				AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" />
         </AbsoluteLayout>

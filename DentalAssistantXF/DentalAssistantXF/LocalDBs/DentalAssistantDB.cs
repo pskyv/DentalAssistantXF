@@ -43,7 +43,19 @@ namespace XFPrismDemo.LocalDBs
 
         public async Task<List<PatientDentalProcedure>> GetPatientDentalProcedures(int patientId)
         {
-            return await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where PatientId =?", patientId);
+            return await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where PatientId =? order by StartDate desc", patientId);
+        }
+
+        public async Task<int> SavePatientDentalprocedureAsync(PatientDentalProcedure procedure)
+        {
+            if (procedure.Id < 1)
+            {
+                return await _connection.InsertAsync(procedure);
+            }
+            else
+            {
+                return await _connection.UpdateAsync(procedure);
+            }
         }
     }
 }

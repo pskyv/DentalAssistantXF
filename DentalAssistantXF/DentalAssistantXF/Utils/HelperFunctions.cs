@@ -8,7 +8,7 @@ namespace DentalAssistantXF.Utils
         public static void ShowToastMessage(ToastMessageType type, string message)
         {
             var icon = string.Empty;
-            System.Drawing.Color color = System.Drawing.Color.ForestGreen;
+            System.Drawing.Color color = System.Drawing.Color.FromArgb(0, 188, 212);
 
             switch (type)
             {

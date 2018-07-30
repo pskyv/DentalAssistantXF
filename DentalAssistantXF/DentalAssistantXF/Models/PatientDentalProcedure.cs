@@ -14,7 +14,9 @@ namespace DentalAssistantXF.Models
 
         public string Description { get; set; }
 
-        public DentalProcedureStatus Status { get; set; }
+        //public DentalProcedureStatus Status { get; set; }
+
+        public bool IsCompleted { get; set; }
 
         public DateTime StartDate { get; set; }
 

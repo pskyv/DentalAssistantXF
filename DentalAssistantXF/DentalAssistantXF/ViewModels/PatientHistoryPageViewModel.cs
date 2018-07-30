@@ -18,15 +18,17 @@ namespace DentalAssistantXF.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
         private Patient _currentPatient;
+        private PatientDentalProcedure _selectedPatientDentalProcedure;
 
         public PatientHistoryPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
 
-            MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetMockProcedures(); }); //{ GetPatienDentalOperationsAsync(); });
+            MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetPatienDentalOperationsAsync(); }); //{ GetPatienDentalOperationsAsync(); });
 
-            PatientDentalProcedures = new ObservableCollection<PatientDentalProcedure>();            
+            PatientDentalProcedures = new ObservableCollection<PatientDentalProcedure>();
+            AddOrEditPatientDentalProcedureCommand = new DelegateCommand<string>(AddOrEditPatientDentalProcedureAsync);
         }        
 
         public Patient CurrentPatient
@@ -35,7 +37,15 @@ namespace DentalAssistantXF.ViewModels
             set { SetProperty(ref _currentPatient, value); }
         }
 
+        public PatientDentalProcedure SelectedPatientDentalProcedure
+        {
+            get { return _selectedPatientDentalProcedure; }
+            set { SetProperty(ref _selectedPatientDentalProcedure, value); }
+        }
+
         public ObservableCollection<PatientDentalProcedure> PatientDentalProcedures { get; }
+
+        public DelegateCommand<string> AddOrEditPatientDentalProcedureCommand { get; }
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
@@ -48,12 +58,29 @@ namespace DentalAssistantXF.ViewModels
         private async void GetPatienDentalOperationsAsync()
         {
             var procedures = await _databaseService.DentalAssistantDB.GetPatientDentalProcedures(CurrentPatient.Id);
+            if (procedures.Count > 0)
+            {
+                procedures.Last<PatientDentalProcedure>().IsLast = true;
+            }
 
             PatientDentalProcedures.Clear();
+            
             foreach(var procedure in procedures)
             {
                 PatientDentalProcedures.Add(procedure);
             }
+        }
+
+        private async void AddOrEditPatientDentalProcedureAsync(string mode = "Edit")
+        {
+            if (string.Equals(mode, "Add"))
+            {
+                var patientDentalProcedure = new PatientDentalProcedure { StartDate = DateTime.Today, PatientId = CurrentPatient.Id };
+                SelectedPatientDentalProcedure = patientDentalProcedure;
+            }
+            var navParams = new NavigationParameters();
+            navParams.Add("PatientDentalProcedure", SelectedPatientDentalProcedure);
+            await _navigationService.NavigateAsync("EditPatientHistoryPage", navParams);
         }
 
         private void GetMockProcedures()
