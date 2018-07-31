@@ -1,6 +1,7 @@
 ﻿using DentalAssistantXF.Models;
 using SQLite;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace XFPrismDemo.LocalDBs
@@ -42,9 +43,19 @@ namespace XFPrismDemo.LocalDBs
             return await _connection.DeleteAsync(patient);
         }
 
-        public async Task<List<PatientDentalProcedure>> GetPatientDentalProcedures(int patientId)
+        public async Task<List<PatientDentalProcedure>> GetPatientDentalProceduresAsync(int patientId)
         {
             return await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where PatientId =? order by StartDate desc", patientId);
+        }
+
+        public async Task<int> GetPatientDentalProceduresCountAsync(int patientId)
+        {
+            return await _connection.Table<PatientDentalProcedure>().Where(p => p.PatientId == patientId).CountAsync();
+        }
+
+        public async Task<bool> HasOpenCasesAsync(int patientId)
+        {
+            return await _connection.Table<PatientDentalProcedure>().Where(p => p.PatientId == patientId && p.IsCompleted == false).CountAsync() > 0;
         }
 
         public async Task<int> SavePatientDentalprocedureAsync(PatientDentalProcedure procedure)
@@ -59,9 +70,15 @@ namespace XFPrismDemo.LocalDBs
             }
         }
 
-        public async Task<IEnumerable<FinTrade>> GetPatientFinTrades(int patientId)
+        public async Task<IEnumerable<FinTrade>> GetPatientFinTradesAsync(int patientId)
         {
             return await _connection.QueryAsync<FinTrade>("select * from FinTrade where PatientId =? order by TradeDate desc", patientId);
+        }
+
+        public async Task<decimal> GetPatientBalanceAsync(int patientId)
+        {
+            var trades = await _connection.Table<FinTrade>().Where(f => f.PatientId == patientId).ToListAsync();
+            return trades.Sum(t => t.AmmountForSum);
         }
 
         public async Task<int> SavePatientFinTradeAsync(FinTrade finTrade)

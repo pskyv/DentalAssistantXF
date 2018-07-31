@@ -38,6 +38,6 @@ namespace DentalAssistantXF.Models
         }
 
         [Ignore]
-        public bool HasOpenCase { get; }
+        public bool HasOpenCase { get; set; }
     }
 }

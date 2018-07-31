@@ -10,7 +10,7 @@ namespace DentalAssistantXF.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? "ic_openCase" : "ic_circle_grey";
+            return (bool)value ? "ic_circle" : "ic_circle_grey";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

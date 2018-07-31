@@ -57,7 +57,7 @@ namespace DentalAssistantXF.ViewModels
 
         private async void GetPatienDentalOperationsAsync()
         {
-            var procedures = await _databaseService.DentalAssistantDB.GetPatientDentalProcedures(CurrentPatient.Id);
+            var procedures = await _databaseService.DentalAssistantDB.GetPatientDentalProceduresAsync(CurrentPatient.Id);
             if (procedures.Count > 0)
             {
                 procedures.Last().IsLast = true;

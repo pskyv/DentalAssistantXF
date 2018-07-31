@@ -18,6 +18,8 @@ namespace DentalAssistantXF.ViewModels
         private readonly IDatabaseService _databaseService;
         private Patient _currentPatient;
         private int _patientId;
+        private int _cases;
+        private decimal _balance;
 
         public PatientProfilePageViewModel(INavigationService navigationService, IDatabaseService databaseService)
         {
@@ -34,6 +36,18 @@ namespace DentalAssistantXF.ViewModels
         {
             get { return _currentPatient; }
             set { SetProperty(ref _currentPatient, value); }
+        }
+
+        public int Cases
+        {
+            get { return _cases; }
+            set { SetProperty(ref _cases, value); }
+        }
+
+        public decimal Balance
+        {
+            get { return _balance; }
+            set { SetProperty(ref _balance, value); }
         }
 
         public DelegateCommand NavigateBackCommand => new DelegateCommand(async () => { await _navigationService.GoBackAsync(); } );
@@ -53,6 +67,8 @@ namespace DentalAssistantXF.ViewModels
         private async void GetPatientAsync()
         {
             CurrentPatient = await _databaseService.DentalAssistantDB.GetPatientAsync(_patientId);
+            Cases = await _databaseService.DentalAssistantDB.GetPatientDentalProceduresCountAsync(_patientId);
+            Balance = await _databaseService.DentalAssistantDB.GetPatientBalanceAsync(_patientId);
         }
 
         private async void NavigateToPage(string page)

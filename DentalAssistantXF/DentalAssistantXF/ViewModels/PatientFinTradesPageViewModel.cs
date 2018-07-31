@@ -64,7 +64,7 @@ namespace DentalAssistantXF.ViewModels
 
         private async void GetPatientFinTradesAsync()
         {
-            var finTrades = await _databaseService.DentalAssistantDB.GetPatientFinTrades(CurrentPatient.Id);
+            var finTrades = await _databaseService.DentalAssistantDB.GetPatientFinTradesAsync(CurrentPatient.Id);
 
             FinTrades.Clear();
             foreach(var finTrade in finTrades)

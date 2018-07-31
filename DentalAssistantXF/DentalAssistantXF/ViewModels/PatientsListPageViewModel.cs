@@ -68,6 +68,7 @@ namespace DentalAssistantXF.ViewModels
             Patients.Clear();
             foreach (var patient in _patients)
             {
+                patient.HasOpenCase = await _databaseService.DentalAssistantDB.HasOpenCasesAsync(patient.Id);
                 Patients.Add(patient);
             }
         }

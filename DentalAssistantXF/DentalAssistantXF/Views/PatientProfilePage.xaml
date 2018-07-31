@@ -84,13 +84,13 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Spacing="0">
-                    <Label Text="3" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
-                    <Label Text="Cases" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                    <Label Text="{Binding Cases}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="Dental Cases" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
-                    <Label Text="50" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
-                    <Label Text="Balance" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
+                    <Label Text="{Binding Balance}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="Financial Balance" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
             </Grid>
 
