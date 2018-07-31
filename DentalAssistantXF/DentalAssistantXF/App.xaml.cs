@@ -44,6 +44,8 @@ namespace DentalAssistantXF
             containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
             containerRegistry.RegisterForNavigation<PatientHistoryPage>();
             containerRegistry.RegisterForNavigation<EditPatientHistoryPage>();
+            containerRegistry.RegisterForNavigation<PatientFinTradesPage>();
+            containerRegistry.RegisterForNavigation<EditPatientFinTradePage>();
         }
     }
 }

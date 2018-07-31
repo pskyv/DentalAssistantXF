@@ -62,6 +62,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.1</Version>
     </PackageReference>
+    <PackageReference Include="BadgeView">
+      <Version>2017.10.17</Version>
+    </PackageReference>
     <PackageReference Include="Refractored.FloatingActionButtonForms">
       <Version>2.1.0</Version>
     </PackageReference>

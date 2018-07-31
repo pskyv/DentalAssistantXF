@@ -25,4 +25,10 @@ namespace DentalAssistantXF.Models
         InProgress,
         Completed
     }
+
+    public enum FinTradeType : int
+    {
+        charge = 0,
+        payment = 1
+    }
 }

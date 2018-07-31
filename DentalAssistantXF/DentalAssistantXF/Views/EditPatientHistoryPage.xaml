@@ -23,15 +23,12 @@
             <Label Text="Dental procedure information" />
         </StackLayout>
         <StackLayout Padding="15,0">
-            <StackLayout Orientation="Horizontal">
-                <Picker MinimumWidthRequest="300" HorizontalOptions="StartAndExpand" 
-                        ItemsSource="{Binding DentalProcedureTypes}" 
-                        SelectedIndex="{Binding SelectedDentalProcedureType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Is completed" VerticalOptions="Center" />
-                    <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding PatientDentalProcedure.IsCompleted, Mode=TwoWay}" />
-                </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Label Text="Is completed" VerticalOptions="Center" />
+                <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding PatientDentalProcedure.IsCompleted, Mode=TwoWay}" />
             </StackLayout>
+            <Picker ItemsSource="{Binding DentalProcedureTypes}" 
+                    SelectedIndex="{Binding SelectedDentalProcedureType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
             <Entry Text="{Binding PatientDentalProcedure.Description}" Placeholder="Description..." />
             <DatePicker Date="{Binding PatientDentalProcedure.StartDate}" Format="dd/MM/yyyy" />
         </StackLayout>

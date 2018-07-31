@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using BadgeView.Android;
 using ImageCircle.Forms.Plugin.Droid;
 using Plugin.CurrentActivity;
 using Prism;
@@ -28,6 +29,8 @@ namespace DentalAssistantXF.Droid
 
             CrossCurrentActivity.Current.Init(this, bundle);
             //CrossCurrentActivity.Current.Activity = this;
+
+            CircleViewRenderer.Initialize();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 

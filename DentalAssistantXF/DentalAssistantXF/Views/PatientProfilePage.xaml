@@ -61,7 +61,7 @@
                         WidthRequest="120" 
                         FontSize="12" 
                         HeightRequest="40" 
-                        Command="{Binding NavigateToPatientHistoryCommand}" 
+                        Command="{Binding NavigateToPatientDetailsCommand}" 
                         CommandParameter="PatientHistoryPage" />
                 <Button Grid.Column="1" 
                         Text="Financial" 
@@ -71,7 +71,9 @@
                         TextColor="White" 
                         WidthRequest="120" 
                         FontSize="12" 
-                        HeightRequest="40" />
+                        HeightRequest="40"
+                        Command="{Binding NavigateToPatientDetailsCommand}" 
+                        CommandParameter="PatientFinTradesPage" />
             </Grid>
 
             <!--  Aggregates  -->

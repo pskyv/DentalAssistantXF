@@ -14,6 +14,7 @@ namespace XFPrismDemo.LocalDBs
             _connection = connection;
             _connection.CreateTableAsync<Patient>().Wait();
             _connection.CreateTableAsync<PatientDentalProcedure>().Wait();
+            _connection.CreateTableAsync<FinTrade>().Wait();
         }
 
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
@@ -55,6 +56,23 @@ namespace XFPrismDemo.LocalDBs
             else
             {
                 return await _connection.UpdateAsync(procedure);
+            }
+        }
+
+        public async Task<IEnumerable<FinTrade>> GetPatientFinTrades(int patientId)
+        {
+            return await _connection.QueryAsync<FinTrade>("select * from FinTrade where PatientId =? order by TradeDate desc", patientId);
+        }
+
+        public async Task<int> SavePatientFinTradeAsync(FinTrade finTrade)
+        {
+            if (finTrade.Id < 1)
+            {
+                return await _connection.InsertAsync(finTrade);
+            }
+            else
+            {
+                return await _connection.UpdateAsync(finTrade);
             }
         }
     }

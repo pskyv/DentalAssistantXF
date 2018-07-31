@@ -60,7 +60,7 @@ namespace DentalAssistantXF.ViewModels
             var procedures = await _databaseService.DentalAssistantDB.GetPatientDentalProcedures(CurrentPatient.Id);
             if (procedures.Count > 0)
             {
-                procedures.Last<PatientDentalProcedure>().IsLast = true;
+                procedures.Last().IsLast = true;
             }
 
             PatientDentalProcedures.Clear();

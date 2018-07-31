@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:badge="clr-namespace:BadgeView.Shared;assembly=BadgeView.Shared"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.PatientFinTradesPage"
+             Title="Patient's financial data"
+             x:Name="PatientFinancialData">
+
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding FinTrades}"
+                  SelectedItem="{Binding SelectedFinTrade, Mode=TwoWay}"
+                  RowHeight="65"
+                  AbsoluteLayout.LayoutFlags="All"
+			      AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding AddOrEditFinTradeCommand}" CommandParameter="Edit"/>
+            </ListView.Behaviors>
+
+            <ListView.Header>
+                <StackLayout>
+                    <StackLayout Spacing="0" Margin="20,10,20,0">
+                        <Label Text="{Binding Path=BindingContext.CurrentPatient.FullName, Source={x:Reference PatientFinancialData}}" FontSize="28" />
+                        <Label Text="Financial trades' balance" TextColor="{StaticResource secondaryText}" FontSize="14" />
+                    </StackLayout>
+
+                    <Grid>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,10">
+                            <badge:CircleView CornerRadius="50" BackgroundColor="{StaticResource primary}" HeightRequest="100" WidthRequest="100" />
+                            <!--<circle:RoundedBoxView BackgroundColor="{StaticResource primary}" CornerRadius="50" HeightRequest="100" WidthRequest="100" />-->
+                        </StackLayout>
+                        <Label Text="{Binding PatientBalance}" TextColor="White" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Grid>
+
+                    <StackLayout Style="{StaticResource Strip}" Margin="0,10">
+                        <Label Text="List of financial trades" />
+                    </StackLayout>
+                </StackLayout>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding TradeDate, StringFormat='{}{0:dd/MM/yyyy}'}" TextColor="{StaticResource primaryText}" />
+                            <Label Grid.Row="1" Text="{Binding TradeType}" TextColor="{Binding Color}" />
+                            <Label Grid.RowSpan="2" Grid.Column="1" VerticalOptions="Center" Text="{Binding Ammount}" TextColor="{StaticResource primaryText}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <fab:FloatingActionButtonView
+				ImageName="ic_add_white_24dp"
+				ColorNormal="{StaticResource primary}"
+				ColorPressed="{StaticResource primaryDark}"
+				ColorRipple="{StaticResource primaryDark}"
+				IsVisible="True"
+                Command="{Binding AddOrEditFinTradeCommand}"
+                CommandParameter="Add"
+				AbsoluteLayout.LayoutFlags="PositionProportional"
+				AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" />
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -25,7 +25,7 @@ namespace DentalAssistantXF.ViewModels
             _databaseService = databaseService;
 
             EditPatientCommand = new DelegateCommand<string>(NavigateToPage);
-            NavigateToPatientHistoryCommand = new DelegateCommand<string>(NavigateToPage);
+            NavigateToPatientDetailsCommand = new DelegateCommand<string>(NavigateToPage);
 
             MessagingCenter.Subscribe<PatientProfilePage>(this, Constants.OnPatientProfilePageAppearingMsg, (sender) => { GetPatientAsync(); });
         }        
@@ -40,7 +40,7 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<string> EditPatientCommand { get; }
 
-        public DelegateCommand<string> NavigateToPatientHistoryCommand { get; }
+        public DelegateCommand<string> NavigateToPatientDetailsCommand { get; }
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
