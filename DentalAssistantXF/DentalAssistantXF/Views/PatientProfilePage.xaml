@@ -7,10 +7,6 @@
              x:Class="DentalAssistantXF.Views.PatientProfilePage"
              NavigationPage.HasNavigationBar="False">
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Icon="ic_pencil_white_18dp" />
-    </ContentPage.ToolbarItems>-->
-
     <ScrollView>
         <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -25,8 +21,13 @@
             <Image Aspect="AspectFill" Source="dentistBackground.png" Opacity="0.5" HeightRequest="200" />
 
             <!--  profile image  -->
-            <controls:CircleImage HeightRequest="120" HorizontalOptions="Center" Aspect="AspectFill" Source="{Binding CurrentPatient.ProfilePhotoSrc}" TranslationY="50" VerticalOptions="End" WidthRequest="120" />
-            <!--<Image HeightRequest="120" HorizontalOptions="Center" Source="ProfilePic2.png" TranslationY="50" VerticalOptions="End" WidthRequest="120" />-->
+            <controls:CircleImage Aspect="AspectFill" 
+                                  Source="{Binding CurrentPatient.ProfilePhotoSrc}" 
+                                  TranslationY="50" 
+                                  HeightRequest="120" 
+                                  WidthRequest="120"
+                                  HorizontalOptions="Center"
+                                  VerticalOptions="End" />
 
             <Button Image="ic_arrow_left_white_24dp" 
                     VerticalOptions="Start" 

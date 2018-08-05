@@ -16,6 +16,7 @@ namespace DentalAssistantXF.Models
 
         public decimal Ammount { get; set; }
 
+        [Ignore]
         public decimal AmmountForSum
         {
             get { return TradeType == FinTradeType.charge ? Ammount : Ammount * (-1); }

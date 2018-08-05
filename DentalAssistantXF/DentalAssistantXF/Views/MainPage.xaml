@@ -8,16 +8,8 @@
             x:Class="DentalAssistantXF.Views.MainPage">
 
     <TabbedPage.Children>
-        <ContentPage Title="Dashboard"
-                     Icon="ic_dashboard">
-            <Grid>
-                <Label 
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Text="Dashboard"/>
-            </Grid>
-        </ContentPage>
-        
+        <views:DashboardPage />
+
         <views:PatientsListPage />
         
         <ContentPage Title="Scheduler"

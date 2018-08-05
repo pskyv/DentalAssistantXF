@@ -17,10 +17,10 @@
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="#CFD8DC" />
             </Style>
-            <Style TargetType="BoxView">
+            <!--<Style TargetType="BoxView">
                 <Setter Property="Color" Value="#BDBDBD" />
                 <Setter Property="HeightRequest" Value="0.5" />
-            </Style>
+            </Style>-->
             <Style TargetType="ActivityIndicator">
                 <Setter Property="Color" Value="#6ff9ff" />
             </Style>

@@ -30,9 +30,11 @@
                     <Grid>
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,10">
                             <badge:CircleView CornerRadius="50" BackgroundColor="{StaticResource primary}" HeightRequest="100" WidthRequest="100" />
-                            <!--<circle:RoundedBoxView BackgroundColor="{StaticResource primary}" CornerRadius="50" HeightRequest="100" WidthRequest="100" />-->
                         </StackLayout>
-                        <Label Text="{Binding PatientBalance}" TextColor="White" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding PatientBalance}" TextColor="White" FontAttributes="Bold" FontSize="22" />
+                            <Image Source="ic_currency_eur_white_18dp" />
+                        </StackLayout>
                     </Grid>
 
                     <StackLayout Style="{StaticResource Strip}" Margin="0,10">

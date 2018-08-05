@@ -43,6 +43,7 @@ namespace XFPrismDemo.LocalDBs
             return await _connection.DeleteAsync(patient);
         }
 
+        #region DentalProcedures
         public async Task<List<PatientDentalProcedure>> GetPatientDentalProceduresAsync(int patientId)
         {
             return await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where PatientId =? order by StartDate desc", patientId);
@@ -69,7 +70,9 @@ namespace XFPrismDemo.LocalDBs
                 return await _connection.UpdateAsync(procedure);
             }
         }
+        #endregion
 
+        #region FinTrades
         public async Task<IEnumerable<FinTrade>> GetPatientFinTradesAsync(int patientId)
         {
             return await _connection.QueryAsync<FinTrade>("select * from FinTrade where PatientId =? order by TradeDate desc", patientId);
@@ -92,5 +95,25 @@ namespace XFPrismDemo.LocalDBs
                 return await _connection.UpdateAsync(finTrade);
             }
         }
+        #endregion
+
+        #region dashboard
+        public async Task<IEnumerable<GroupedOpenDentalProcedure>> GetGroupedOpenDentalProceduresAsync()
+        {
+            var openProcedures = await _connection.QueryAsync<PatientDentalProcedure>("select * from PatientDentalProcedure where IsCompleted =?", false); //Table<PatientDentalProcedure>().Where(d => d.IsCompleted == false);
+            var query = from d in openProcedures
+                        group d by d.DentalProcedure into g
+                        select new GroupedOpenDentalProcedure { DentalProcedureType = g.Key, Count = g.Count() };
+
+            return query;
+        }
+
+        public async Task<IEnumerable<FinTradeDTO>> GetFinTradesAsync()
+        {
+            return await _connection.QueryAsync<FinTradeDTO>("select P.FirstName, P.LastName, F.TradeType, F.Ammount " +
+                                                             "from FinTrade F inner join " +
+                                                             "Patient P on F.PatientId = P.Id");
+        }
+        #endregion
     }
 }
