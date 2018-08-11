@@ -11,15 +11,8 @@
         <views:DashboardPage />
 
         <views:PatientsListPage />
-        
-        <ContentPage Title="Scheduler"
-                     Icon="ic_scheduler">
-            <Grid>
-                <Label HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Text="Scheduler" />
-            </Grid>
-        </ContentPage>
+
+        <views:AppointmentsListPage />
     </TabbedPage.Children>
 
 </TabbedPage>

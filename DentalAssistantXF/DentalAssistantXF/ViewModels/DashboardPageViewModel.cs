@@ -46,17 +46,13 @@ namespace DentalAssistantXF.ViewModels
                 GroupedOpenDentalProcedures.Add(groupedProcedure);
             }
 
-            var finTrades = await _databaseService.DentalAssistantDB.GetFinTradesAsync();        
-            TotalDebt = finTrades.Sum(f => f.AmmountForSum);
+            var groupedTrades = await _databaseService.DentalAssistantDB.GetFinTradesAsync();
+            TotalDebt = groupedTrades.Sum(g => g.Sum);
 
-            var qroupedTrades = from f in finTrades
-                        group f by f.FullName into g
-                        select new GroupedFinTrade { FullName = g.Key, Sum = g.Sum(f => f.AmmountForSum) };
-
-            var maxSumGroupedTrades = qroupedTrades.OrderByDescending(q => q.Sum).Take(qroupedTrades.Count() > 2 ? 3 : qroupedTrades.Count());
+            var maxSumGroupedTrades = groupedTrades.OrderByDescending(q => q.Sum).Take(groupedTrades.Count() > 2 ? 3 : groupedTrades.Count());
 
             GroupedFinTrades.Clear();
-            foreach(var gTrade in maxSumGroupedTrades)
+            foreach (var gTrade in maxSumGroupedTrades)
             {
                 GroupedFinTrades.Add(gTrade);
             }

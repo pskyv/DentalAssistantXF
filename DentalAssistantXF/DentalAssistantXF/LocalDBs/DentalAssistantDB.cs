@@ -1,5 +1,6 @@
 ﻿using DentalAssistantXF.Models;
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +17,10 @@ namespace XFPrismDemo.LocalDBs
             _connection.CreateTableAsync<Patient>().Wait();
             _connection.CreateTableAsync<PatientDentalProcedure>().Wait();
             _connection.CreateTableAsync<FinTrade>().Wait();
+            _connection.CreateTableAsync<Appointment>().Wait();
         }
 
+        #region patient
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
         {
             return await _connection.Table<Patient>().ToListAsync();
@@ -42,6 +45,7 @@ namespace XFPrismDemo.LocalDBs
         {
             return await _connection.DeleteAsync(patient);
         }
+        #endregion
 
         #region DentalProcedures
         public async Task<List<PatientDentalProcedure>> GetPatientDentalProceduresAsync(int patientId)
@@ -108,11 +112,51 @@ namespace XFPrismDemo.LocalDBs
             return query;
         }
 
-        public async Task<IEnumerable<FinTradeDTO>> GetFinTradesAsync()
+        public async Task<IEnumerable<GroupedFinTrade>> GetFinTradesAsync()
         {
-            return await _connection.QueryAsync<FinTradeDTO>("select P.FirstName, P.LastName, F.TradeType, F.Ammount " +
-                                                             "from FinTrade F inner join " +
-                                                             "Patient P on F.PatientId = P.Id");
+            var finTrades = await _connection.QueryAsync<FinTradeDTO>("select P.FirstName, P.LastName, F.TradeType, F.Ammount " +
+                                                                      "from FinTrade F inner join " +
+                                                                      "Patient P on F.PatientId = P.Id");
+
+            var groupedTrades = from f in finTrades
+                                group f by f.FullName into g
+                                select new GroupedFinTrade { FullName = g.Key, Sum = g.Sum(f => f.AmmountForSum) };
+
+            return groupedTrades;
+        }
+        #endregion
+
+        #region appointments
+        public async Task<List<AppointmentDTO>> GetAppointmentsListAsync(DateTime date)
+        {
+            return await _connection.QueryAsync<AppointmentDTO>("select A.Id, P.Id as PatientId, P.FirstName, P.LastName, " +
+                                                                "A.AppointmentDate, A.AppointmentTime, A.subject " +
+                                                                "from Appointment A inner join " +
+                                                                "Patient P on A.PatientId = P.Id " +
+                                                                "where A.AppointmentDate = ? " +
+                                                                "order by A.AppointmentTime", date);
+        }
+
+        public async Task<Appointment> GetAppointmentAsync(int id)
+        {
+            return await _connection.GetAsync<Appointment>(id);            
+        }
+
+        public async Task<int> SaveAppointmentAsync(Appointment appointment)
+        {
+            if (appointment.Id < 1)
+            {
+                return await _connection.InsertAsync(appointment);
+            }
+            else
+            {
+                return await _connection.UpdateAsync(appointment);
+            }
+        }
+
+        public async Task<int> DeleteAppointmentAsync(Appointment appointment)
+        {
+            return await _connection.DeleteAsync(appointment);
         }
         #endregion
     }
