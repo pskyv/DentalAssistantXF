@@ -7,7 +7,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DentalAssistantXF.Views.AppointmentsListPage"
              Title="Scheduler"
-             Icon="ic_scheduler">
+             Icon="ic_scheduler"
+             x:Name="AppointmentsList">
 
     <StackLayout>
         <StackLayout Orientation="Horizontal" Margin="20,20,10,4">
@@ -41,7 +42,13 @@
                                         <StackLayout Style="{StaticResource Strip}">
                                             <StackLayout Orientation="Horizontal">
                                                 <Label FontAttributes="Bold" Text="{Binding AppointmentTime, StringFormat=\{0:h\\:mm\}}" VerticalOptions="Center" />
-                                                <Button BackgroundColor="Transparent" Image="ic_dots_vertical_black_18dp" HorizontalOptions="EndAndExpand" WidthRequest="25" HeightRequest="20" />
+                                                <Button BackgroundColor="Transparent" 
+                                                        Image="ic_dots_vertical_black_18dp" 
+                                                        HorizontalOptions="EndAndExpand" 
+                                                        WidthRequest="25" 
+                                                        HeightRequest="20"
+                                                        Command="{Binding Path=BindingContext.ShowActionsCommand, Source={x:Reference AppointmentsList}}"
+                                                        CommandParameter="{Binding .}" />
                                             </StackLayout>
                                         </StackLayout>
                                         <StackLayout Grid.Row="1" Padding="15,5">

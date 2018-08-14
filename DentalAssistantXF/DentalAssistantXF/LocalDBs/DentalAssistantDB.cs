@@ -129,7 +129,7 @@ namespace XFPrismDemo.LocalDBs
         #region appointments
         public async Task<List<AppointmentDTO>> GetAppointmentsListAsync(DateTime date)
         {
-            return await _connection.QueryAsync<AppointmentDTO>("select A.Id, P.Id as PatientId, P.FirstName, P.LastName, " +
+            return await _connection.QueryAsync<AppointmentDTO>("select A.Id, P.Id as PatientId, P.FirstName, P.LastName, P.Phone, " +
                                                                 "A.AppointmentDate, A.AppointmentTime, A.subject " +
                                                                 "from Appointment A inner join " +
                                                                 "Patient P on A.PatientId = P.Id " +
@@ -154,8 +154,9 @@ namespace XFPrismDemo.LocalDBs
             }
         }
 
-        public async Task<int> DeleteAppointmentAsync(Appointment appointment)
+        public async Task<int> DeleteAppointmentAsync(int appointmentId)
         {
+            var appointment = await _connection.GetAsync<Appointment>(appointmentId);
             return await _connection.DeleteAsync(appointment);
         }
         #endregion

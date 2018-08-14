@@ -5,10 +5,12 @@ using DentalAssistantXF.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace DentalAssistantXF.ViewModels
@@ -17,19 +19,22 @@ namespace DentalAssistantXF.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
+        private readonly IPageDialogService _dialogService;
         private DateTime _filterDate;
         private AppointmentDTO _selectedAppointment;
 
-        public AppointmentsListPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public AppointmentsListPageViewModel(INavigationService navigationService, IDatabaseService databaseService, IPageDialogService dialogService)
         {
             _navigationService = navigationService;
             _databaseService = databaseService;
+            _dialogService = dialogService;
 
             Appointments = new ObservableCollection<AppointmentDTO>();
             MessagingCenter.Subscribe<AppointmentsListPage>(this, Constants.OnAppointmentsListPageAppearingMsg, (sender) => { FilterDate = DateTime.Today; });
 
             AddAppointmentCommand = new DelegateCommand(AddAppointment);
-        }
+            ShowActionsCommand = new DelegateCommand<AppointmentDTO>(ShowActions);
+        }        
 
         public DateTime FilterDate
         {
@@ -51,6 +56,8 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand AddAppointmentCommand { get; }
 
+        public DelegateCommand<AppointmentDTO> ShowActionsCommand { get; }
+
         private async void GetAppointmentsAsync()
         {
             var appointments = await _databaseService.DentalAssistantDB.GetAppointmentsListAsync(FilterDate);
@@ -61,11 +68,51 @@ namespace DentalAssistantXF.ViewModels
 
         private async void AddAppointment()
         {
-            var appointment = new Appointment { AppointmentDate = DateTime.Today, PatientId = 1 }; // PatientId = 1    to be deleted......!!!!!!
+            var appointment = new Appointment { AppointmentDate = DateTime.Today }; // PatientId = 1    to be deleted......!!!!!!
 
             var navParams = new NavigationParameters();
             navParams.Add("Appointment", appointment);
             await _navigationService.NavigateAsync("EditAppointmentPage", navParams);
+        }        
+
+        private async void ShowActions(AppointmentDTO appointmentDTO)
+        {
+            IActionSheetButton editAppointmentBtn = ActionSheetButton.CreateButton("Edit appointment", new DelegateCommand(() => { EditAppointment(appointmentDTO); }));
+            IActionSheetButton deleteAppointmentBtn = ActionSheetButton.CreateButton("Delete appointment", new DelegateCommand(() => { DeleteAppointment(appointmentDTO.Id); }));
+            IActionSheetButton callPatientBtn = ActionSheetButton.CreateButton("Call patient", new DelegateCommand(() => { CallPatient(appointmentDTO.Phone); }));
+            await _dialogService.DisplayActionSheetAsync("Appointment actions", editAppointmentBtn, deleteAppointmentBtn);
+        }        
+
+        private async void EditAppointment(AppointmentDTO appointmentDTO)
+        {
+            var appointment = await _databaseService.DentalAssistantDB.GetAppointmentAsync(appointmentDTO.Id);
+            var patient = await _databaseService.DentalAssistantDB.GetPatientAsync(appointmentDTO.PatientId);
+
+            var navParams = new NavigationParameters();
+            navParams.Add("Appointment", appointment);
+            navParams.Add("Patient", patient);
+            await _navigationService.NavigateAsync("EditAppointmentPage", navParams);
+        }
+
+        private void CallPatient(string phone)
+        {
+            
+        }
+
+        private async void DeleteAppointment(int appointmentId)
+        {
+            try
+            {
+                if (await _databaseService.DentalAssistantDB.DeleteAppointmentAsync(appointmentId) > 0)
+                {
+                    GetAppointmentsAsync();
+                    HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Appointment deleted successfully");
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DentalAssistantXF.ViewModels
@@ -14,6 +15,8 @@ namespace DentalAssistantXF.ViewModels
     {
         private readonly IDatabaseService _databaseService;
         private Appointment _appointment;
+        private Patient _selectedPatient;
+        private Patient _tempPatient;
         private string _title;
 
         public EditAppointmentPageViewModel(IDatabaseService databaseService)
@@ -21,12 +24,19 @@ namespace DentalAssistantXF.ViewModels
             _databaseService = databaseService;
 
             SaveAppointmentCommand = new DelegateCommand(SaveAppointment);
+            Patients = new ObservableCollection<Patient>();
         }        
 
         public Appointment Appointment
         {
             get { return _appointment; }
             set { SetProperty(ref _appointment, value); }
+        }
+
+        public Patient SelectedPatient
+        {
+            get { return _selectedPatient; }
+            set { SetProperty(ref _selectedPatient, value); }
         }
 
         public string Title
@@ -37,17 +47,40 @@ namespace DentalAssistantXF.ViewModels
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
+            _tempPatient = null;
+
             if (parameters != null)
             {
                 Appointment = (Appointment)parameters["Appointment"];
-                Title = Appointment.Id < 1 ? "Add new appointment" : "Edit appointment";
-            }
-        }
+                Title = Appointment.Id < 1 ? "Add new appointment" : "Edit appointment";                
+
+                if (parameters["Patient"] != null)
+                {
+                    _tempPatient = (Patient)parameters["Patient"];
+                }
+
+                GetPatientsAsync();
+            }            
+        }        
+
+        public ObservableCollection<Patient> Patients { get; }
 
         public DelegateCommand SaveAppointmentCommand { get; }
 
+        private async void GetPatientsAsync()
+        {
+            var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
+            Patients.Clear();
+            patients.ToList().ForEach(Patients.Add);
+            if (_tempPatient != null)
+            {
+                SelectedPatient = Patients.Where(p => p.Id == _tempPatient.Id).FirstOrDefault();
+            }
+        }
+
         private async void SaveAppointment()
         {
+            Appointment.PatientId = SelectedPatient.Id;
             try
             {
                 if (await _databaseService.DentalAssistantDB.SaveAppointmentAsync(Appointment) > 0)

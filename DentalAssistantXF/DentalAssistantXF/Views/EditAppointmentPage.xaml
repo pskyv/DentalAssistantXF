@@ -15,10 +15,16 @@
         <StackLayout Style="{StaticResource Strip}">
             <Label Text="Appointment information" />
         </StackLayout>
+        
         <StackLayout Padding="15,0">
-
+            <Picker ItemsSource="{Binding Patients}"
+                    ItemDisplayBinding="{Binding FullName}"
+                    SelectedItem="{Binding SelectedPatient, Mode=TwoWay}" />
+            
             <DatePicker Date="{Binding Appointment.AppointmentDate}" Format="dd/MM/yyyy" />
+            
             <TimePicker Time="{Binding Appointment.AppointmentTime}" Format="HH:mm" />
+            
             <Entry Text="{Binding Appointment.Subject}" Placeholder="Subject..." />
         </StackLayout>
 

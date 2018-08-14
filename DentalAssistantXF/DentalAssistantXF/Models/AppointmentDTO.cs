@@ -16,6 +16,8 @@ namespace DentalAssistantXF.Models
 
         public string FullName => LastName + " " + FirstName;
 
+        public string Phone { get; set; }
+
         public DateTime AppointmentDate { get; set; }
 
         public TimeSpan AppointmentTime { get; set; }
