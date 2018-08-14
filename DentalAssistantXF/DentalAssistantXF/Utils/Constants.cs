@@ -13,5 +13,7 @@ namespace DentalAssistantXF.Utils
         public const string OnPatientHistoryPageAppearingMsg = "OnPatientHistoryPageAppearingMsg";
         public const string OnPatientFinTradesPageAppearingMsg = "OnPatientFinTradesPageAppearingMsg";
         public const string OnAppointmentsListPageAppearingMsg = "OnAppointmentsListPageAppearingMsg";
+        public const string OnAddOrEditPatientMsg = "OnAddOrEditPatientMsg";
+        public const string OnAddOrEditAppointmentMsg = "OnAddOrEditAppointmentMsg";
     }
 }

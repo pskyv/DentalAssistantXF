@@ -31,10 +31,15 @@ namespace DentalAssistantXF.ViewModels
             _dialogService = dialogService;
 
             Appointments = new ObservableCollection<AppointmentDTO>();
-            MessagingCenter.Subscribe<AppointmentsListPage>(this, Constants.OnAppointmentsListPageAppearingMsg, (sender) => { FilterDate = DateTime.Today; });
 
             AddAppointmentCommand = new DelegateCommand(AddAppointment);
             ShowActionsCommand = new DelegateCommand<AppointmentDTO>(ShowActions);
+
+            //Subscribe to event only for the first appearance of the AppointmentsListPage
+            MessagingCenter.Subscribe<AppointmentsListPage>(this, Constants.OnAppointmentsListPageAppearingMsg, (sender) => { OnFirstAppearance(); });
+
+            //Refresh appointments list after adding or editing appointment
+            MessagingCenter.Subscribe<EditAppointmentPageViewModel>(this, Constants.OnAddOrEditAppointmentMsg, (sender) => { GetAppointmentsAsync(); });
         }        
 
         public DateTime FilterDate
@@ -59,12 +64,20 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<AppointmentDTO> ShowActionsCommand { get; }
 
+        private void OnFirstAppearance()
+        {
+            FilterDate = DateTime.Today;
+
+            //Get appointments only on first appearance
+            MessagingCenter.Unsubscribe<AppointmentsListPage>(this, Constants.OnAppointmentsListPageAppearingMsg);
+        }
+
         private async void GetAppointmentsAsync()
         {
             var appointments = await _databaseService.DentalAssistantDB.GetAppointmentsListAsync(FilterDate);
 
             Appointments.Clear();
-            appointments.ForEach(Appointments.Add);
+            appointments.ForEach(Appointments.Add);            
         }
 
         private async void AddAppointment()

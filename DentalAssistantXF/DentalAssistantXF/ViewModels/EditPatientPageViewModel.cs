@@ -61,6 +61,7 @@ namespace DentalAssistantXF.ViewModels
                     if (await _databaseService.DentalAssistantDB.UpdatePatientAsync(Patient) > 0)
                     {
                         HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Patient saved successfully");
+                        MessagingCenter.Send(this, Constants.OnAddOrEditPatientMsg);
                     }
                 }
                 else
@@ -68,6 +69,7 @@ namespace DentalAssistantXF.ViewModels
                     if (await _databaseService.DentalAssistantDB.SavePatientAsync(Patient) > 0)
                     {
                         HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Patient saved successfully");
+                        MessagingCenter.Send(this, Constants.OnAddOrEditPatientMsg);
                     }
                 }
             }

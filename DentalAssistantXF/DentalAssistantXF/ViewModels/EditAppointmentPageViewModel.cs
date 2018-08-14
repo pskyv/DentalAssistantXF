@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace DentalAssistantXF.ViewModels
 {
@@ -86,6 +87,7 @@ namespace DentalAssistantXF.ViewModels
                 if (await _databaseService.DentalAssistantDB.SaveAppointmentAsync(Appointment) > 0)
                 {
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Appointment saved successfully");
+                    MessagingCenter.Send(this, Constants.OnAddOrEditAppointmentMsg);
                 }
             }
             catch (Exception e)

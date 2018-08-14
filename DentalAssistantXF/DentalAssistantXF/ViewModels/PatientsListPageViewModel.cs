@@ -29,11 +29,16 @@ namespace DentalAssistantXF.ViewModels
             _databaseService = databaseService;
 
             Patients = new ObservableCollection<Patient>();
+
             AddPatientCommand = new DelegateCommand(AddPatient);
             NavigateToPatientDetailsCommand = new DelegateCommand(NavigateToPatientDetailsAsync);
             FilterPatientsCommand = new DelegateCommand(FilterPatients);
-            //GetPatients();
+
+            //Subscribe to event only for the first appearance of the PatientsListPage
             MessagingCenter.Subscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg, (sender) => { GetPatientsAsync(); });
+
+            //Refresh patients list after adding or editing patient
+            MessagingCenter.Subscribe<EditPatientPageViewModel>(this, Constants.OnAddOrEditPatientMsg, (sender) => { GetPatientsAsync(); });
         }        
 
         public Patient SelectedPatient
@@ -71,6 +76,9 @@ namespace DentalAssistantXF.ViewModels
                 patient.HasOpenCase = await _databaseService.DentalAssistantDB.HasOpenCasesAsync(patient.Id);
                 Patients.Add(patient);
             }
+
+            //Get patients only on first appearance
+            MessagingCenter.Unsubscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg);
         }
 
         private async void NavigateToPatientDetailsAsync()
@@ -114,24 +122,27 @@ namespace DentalAssistantXF.ViewModels
             await _navigationService.NavigateAsync("EditPatientPage", navParams);
         }
 
-        private void GetPatients()
-        {
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(PatientsListPageViewModel)).Assembly;
 
-            Stream stream = assembly.GetManifestResourceStream("DentalAssistantXF.patientsList.json");
-            string jsonInput = "";
-            using (var reader = new System.IO.StreamReader(stream))
-            {
-                jsonInput = reader.ReadToEnd();
-            }
+        //Test data
 
-            var patients = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Patient>>(jsonInput);
+        //private void GetPatients()
+        //{
+        //    var assembly = IntrospectionExtensions.GetTypeInfo(typeof(PatientsListPageViewModel)).Assembly;
 
-            Patients.Clear();
-            foreach (var patient in patients)
-            {
-                Patients.Add(patient);
-            }
-        }
+        //    Stream stream = assembly.GetManifestResourceStream("DentalAssistantXF.patientsList.json");
+        //    string jsonInput = "";
+        //    using (var reader = new System.IO.StreamReader(stream))
+        //    {
+        //        jsonInput = reader.ReadToEnd();
+        //    }
+
+        //    var patients = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Patient>>(jsonInput);
+
+        //    Patients.Clear();
+        //    foreach (var patient in patients)
+        //    {
+        //        Patients.Add(patient);
+        //    }
+        //}
     }
 }
