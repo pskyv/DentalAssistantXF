@@ -7,6 +7,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace DentalAssistantXF.ViewModels
 {
@@ -69,6 +70,7 @@ namespace DentalAssistantXF.ViewModels
                 if (await _databaseService.DentalAssistantDB.SavePatientDentalprocedureAsync(PatientDentalProcedure) > 0)
                 {
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Dental procedure saved successfully");
+                    MessagingCenter.Send(this, Constants.OnDasboardDataChangeMsg);
                 }
             }
             catch (Exception e)

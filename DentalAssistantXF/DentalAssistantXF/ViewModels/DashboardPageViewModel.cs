@@ -23,7 +23,10 @@ namespace DentalAssistantXF.ViewModels
 
             GroupedOpenDentalProcedures = new ObservableCollection<GroupedOpenDentalProcedure>();
             GroupedFinTrades = new ObservableCollection<GroupedFinTrade>();
+
             MessagingCenter.Subscribe<DashboardPage>(this, Constants.OnDashboardPageAppearingMsg, (sender) => { DashboardProceduresAsync(); });
+            MessagingCenter.Subscribe<EditPatientFinTradePageViewModel>(this, Constants.OnDasboardDataChangeMsg, (sender) => { DashboardProceduresAsync(); });
+            MessagingCenter.Subscribe<EditPatientHistoryPageViewModel>(this, Constants.OnDasboardDataChangeMsg, (sender) => { DashboardProceduresAsync(); });
         }        
 
         public decimal TotalDebt
@@ -56,6 +59,8 @@ namespace DentalAssistantXF.ViewModels
             {
                 GroupedFinTrades.Add(gTrade);
             }
+
+            MessagingCenter.Unsubscribe<DashboardPage>(this, Constants.OnDashboardPageAppearingMsg);
         }
     }
 }

@@ -29,7 +29,7 @@
             <StackLayout Padding="15,0">
                 <Entry Text="{Binding Patient.FirstName}" Placeholder="First name..." />
                 <Entry Text="{Binding Patient.LastName}" Placeholder="Last name..." />
-                <!--<DatePicker Date="{Binding Patient.BirthDate}" />-->
+                <DatePicker Date="{Binding Patient.BirthDate}" />
                 <Entry Text="{Binding Patient.Occupation}" Placeholder="Occupation..." />
             </StackLayout>
 
