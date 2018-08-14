@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace DentalAssistantXF.ViewModels
@@ -68,7 +69,7 @@ namespace DentalAssistantXF.ViewModels
 
         private async void AddAppointment()
         {
-            var appointment = new Appointment { AppointmentDate = DateTime.Today }; // PatientId = 1    to be deleted......!!!!!!
+            var appointment = new Appointment { AppointmentDate = DateTime.Today, AppointmentTime = DateTime.Now.TimeOfDay }; // PatientId = 1    to be deleted......!!!!!!
 
             var navParams = new NavigationParameters();
             navParams.Add("Appointment", appointment);
@@ -80,7 +81,7 @@ namespace DentalAssistantXF.ViewModels
             IActionSheetButton editAppointmentBtn = ActionSheetButton.CreateButton("Edit appointment", new DelegateCommand(() => { EditAppointment(appointmentDTO); }));
             IActionSheetButton deleteAppointmentBtn = ActionSheetButton.CreateButton("Delete appointment", new DelegateCommand(() => { DeleteAppointment(appointmentDTO.Id); }));
             IActionSheetButton callPatientBtn = ActionSheetButton.CreateButton("Call patient", new DelegateCommand(() => { CallPatient(appointmentDTO.Phone); }));
-            await _dialogService.DisplayActionSheetAsync("Appointment actions", editAppointmentBtn, deleteAppointmentBtn);
+            await _dialogService.DisplayActionSheetAsync("Appointment actions", editAppointmentBtn, callPatientBtn, deleteAppointmentBtn);
         }        
 
         private async void EditAppointment(AppointmentDTO appointmentDTO)
@@ -96,7 +97,18 @@ namespace DentalAssistantXF.ViewModels
 
         private void CallPatient(string phone)
         {
-            
+            try
+            {
+                PhoneDialer.Open(phone);
+            }
+            catch (ArgumentNullException anEx)
+            {
+                // Number was null or white space
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                // Phone Dialer is not supported on this device.
+            }
         }
 
         private async void DeleteAppointment(int appointmentId)

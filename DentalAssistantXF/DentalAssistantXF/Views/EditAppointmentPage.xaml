@@ -17,7 +17,8 @@
         </StackLayout>
         
         <StackLayout Padding="15,0">
-            <Picker ItemsSource="{Binding Patients}"
+            <Picker Title="Select patient..." 
+                    ItemsSource="{Binding Patients}"
                     ItemDisplayBinding="{Binding FullName}"
                     SelectedItem="{Binding SelectedPatient, Mode=TwoWay}" />
             
