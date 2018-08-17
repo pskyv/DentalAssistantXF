@@ -40,7 +40,7 @@ namespace DentalAssistantXF.ViewModels
 
             //Refresh appointments list after adding or editing appointment
             MessagingCenter.Subscribe<EditAppointmentPageViewModel>(this, Constants.OnAddOrEditAppointmentMsg, (sender) => { GetAppointmentsAsync(); });
-        }        
+        } 
 
         public DateTime FilterDate
         {
@@ -48,7 +48,7 @@ namespace DentalAssistantXF.ViewModels
             set
             {
                 SetProperty(ref _filterDate, value);
-                GetAppointmentsAsync();
+                GetAppointmentsAsync();                
             }
         }
 
@@ -77,7 +77,7 @@ namespace DentalAssistantXF.ViewModels
             var appointments = await _databaseService.DentalAssistantDB.GetAppointmentsListAsync(FilterDate);
 
             Appointments.Clear();
-            appointments.ForEach(Appointments.Add);            
+            appointments.ForEach(Appointments.Add);
         }
 
         private async void AddAppointment()
@@ -94,6 +94,7 @@ namespace DentalAssistantXF.ViewModels
             IActionSheetButton editAppointmentBtn = ActionSheetButton.CreateButton("Edit appointment", new DelegateCommand(() => { EditAppointment(appointmentDTO); }));
             IActionSheetButton deleteAppointmentBtn = ActionSheetButton.CreateButton("Delete appointment", new DelegateCommand(() => { DeleteAppointment(appointmentDTO.Id); }));
             IActionSheetButton callPatientBtn = ActionSheetButton.CreateButton("Call patient", new DelegateCommand(() => { CallPatient(appointmentDTO.Phone); }));
+            
             await _dialogService.DisplayActionSheetAsync("Appointment actions", editAppointmentBtn, callPatientBtn, deleteAppointmentBtn);
         }        
 

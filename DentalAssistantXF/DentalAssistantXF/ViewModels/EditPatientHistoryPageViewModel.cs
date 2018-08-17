@@ -11,8 +11,8 @@ using Xamarin.Forms;
 
 namespace DentalAssistantXF.ViewModels
 {
-	public class EditPatientHistoryPageViewModel : BindableBase, INavigatingAware
-	{
+    public class EditPatientHistoryPageViewModel : BindableBase, INavigatingAware
+    {
         private readonly INavigationService _navigationService;
         private readonly IDatabaseService _databaseService;
         private PatientDentalProcedure _patientDentalProcedure;
@@ -25,7 +25,8 @@ namespace DentalAssistantXF.ViewModels
             _databaseService = databaseService;
 
             SavePatientDentalProcedureCommand = new DelegateCommand(SavePatientDentalProcedureAsync);
-        }        
+            CreateFinTradeCommand = new DelegateCommand(CreateFinTradeAsync);
+        }
 
         public PatientDentalProcedure PatientDentalProcedure
         {
@@ -52,9 +53,11 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand SavePatientDentalProcedureCommand { get; }
 
+        public DelegateCommand CreateFinTradeCommand { get; }
+
         public void OnNavigatingTo(NavigationParameters parameters)
         {
-            if(parameters != null)
+            if (parameters != null)
             {
                 PatientDentalProcedure = (PatientDentalProcedure)parameters["PatientDentalProcedure"];
                 Title = PatientDentalProcedure.Id < 1 ? "Add procedure" : "Edit procedure";
@@ -77,6 +80,16 @@ namespace DentalAssistantXF.ViewModels
             {
 
             }
+        }
+
+        private async void CreateFinTradeAsync()
+        {
+            var patient = await _databaseService.DentalAssistantDB.GetPatientAsync(PatientDentalProcedure.PatientId);
+            var finTrade = new FinTrade { TradeDate = DateTime.Today, PatientId = patient.Id };
+
+            var navParams = new NavigationParameters();
+            navParams.Add("PatientFinTrade", finTrade);
+            await _navigationService.NavigateAsync("EditPatientFinTradePage", navParams);
         }
     }
 }

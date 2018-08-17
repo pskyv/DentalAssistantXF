@@ -15,6 +15,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="ic_check_white_24dp" Command="{Binding SavePatientDentalProcedureCommand}" />
+        <ToolbarItem Text="Create financial trade" Order="Secondary" Command="{Binding CreateFinTradeCommand}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>

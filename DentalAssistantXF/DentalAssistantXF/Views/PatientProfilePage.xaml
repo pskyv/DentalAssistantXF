@@ -35,13 +35,12 @@
                     WidthRequest="60" 
                     BackgroundColor="Transparent" 
                     Command="{Binding NavigateBackCommand}" />
-            <Button Image="ic_pencil_white_18dp.png" 
+            <Button Image="ic_dots_vertical_white_18dp.png" 
                     VerticalOptions="Start" 
                     HorizontalOptions="End" 
                     WidthRequest="60" 
                     BackgroundColor="Transparent" 
-                    Command="{Binding EditPatientCommand}"
-                    CommandParameter="EditPatientPage"/>
+                    Command="{Binding ShowPatientActionsCommand}" />
 
             <!--  Profile Name  -->
             <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
@@ -61,7 +60,8 @@
                         TextColor="White" 
                         WidthRequest="120" 
                         FontSize="12" 
-                        HeightRequest="40" 
+                        HeightRequest="40"
+                        Image="ic_history_white_18dp"
                         Command="{Binding NavigateToPatientDetailsCommand}" 
                         CommandParameter="PatientHistoryPage" />
                 <Button Grid.Column="1" 
@@ -73,6 +73,7 @@
                         WidthRequest="120" 
                         FontSize="12" 
                         HeightRequest="40"
+                        Image="ic_cash_white_18dp"
                         Command="{Binding NavigateToPatientDetailsCommand}" 
                         CommandParameter="PatientFinTradesPage" />
             </Grid>
