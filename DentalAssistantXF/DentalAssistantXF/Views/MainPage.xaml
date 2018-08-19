@@ -9,9 +9,7 @@
 
     <TabbedPage.Children>
         <views:DashboardPage />
-
         <views:PatientsListPage />
-
         <views:AppointmentsListPage />
     </TabbedPage.Children>
 

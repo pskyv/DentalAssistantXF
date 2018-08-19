@@ -11,9 +11,9 @@
             <x:Arguments>
                 <ContentPage NavigationPage.HasNavigationBar="False">
                     <StackLayout>
-                        <StackLayout Padding="10,20" BackgroundColor="#eeeeee">
+                        <StackLayout Padding="10,20" Orientation="Horizontal" BackgroundColor="#eeeeee">
                             <Image Source="ic_dental_logo" HorizontalOptions="Start" WidthRequest="60" HeightRequest="60" />
-                            <Label Text="Dentist Assist" FontSize="Large" HorizontalOptions="Start" />
+                            <Label Text="Dentist Assist" FontSize="Large" VerticalOptions="Center" />
                         </StackLayout>
 
                         <ListView ItemsSource="{Binding NavItems}" 

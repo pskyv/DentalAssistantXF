@@ -49,6 +49,7 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<DashboardPage>();
             containerRegistry.RegisterForNavigation<AppointmentsListPage>();
             containerRegistry.RegisterForNavigation<EditAppointmentPage>();
+            containerRegistry.RegisterForNavigation<SettingsPage>();
         }
     }
 }
