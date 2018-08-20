@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
 using DentalAssistantXF.Services;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DentalAssistantXF
@@ -29,7 +30,14 @@ namespace DentalAssistantXF
 
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+            if (Preferences.Get("LoginWithPass", false))
+            {
+                await NavigationService.NavigateAsync("LoginPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -50,6 +58,7 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<AppointmentsListPage>();
             containerRegistry.RegisterForNavigation<EditAppointmentPage>();
             containerRegistry.RegisterForNavigation<SettingsPage>();
+            containerRegistry.RegisterForNavigation<LoginPage>();
         }
     }
 }
