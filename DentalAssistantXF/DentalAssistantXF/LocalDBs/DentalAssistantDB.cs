@@ -23,7 +23,8 @@ namespace XFPrismDemo.LocalDBs
         #region patient
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
         {
-            return await _connection.Table<Patient>().ToListAsync();
+            var patients = await _connection.Table<Patient>().ToListAsync();
+            return patients.OrderBy(p => p.LastName);
         }
 
         public async Task<Patient> GetPatientAsync(int id)
@@ -124,17 +125,28 @@ namespace XFPrismDemo.LocalDBs
 
             return groupedTrades;
         }
+
+        public async Task<AppointmentDTO> GetNextAppointment()
+        {
+            var appointments = await _connection.QueryAsync<AppointmentDTO>("select A.Id, P.Id as PatientId, P.FirstName, P.LastName, P.Phone, " +
+                                                                            "A.AppointmentDate, A.AppointmentTime, A.subject " +
+                                                                            "from Appointment A inner join " +
+                                                                            "Patient P on A.PatientId = P.Id " +
+                                                                            "where A.AppointmentDate >= ? ", DateTime.Now.Date);
+
+            return appointments.Where(p => p.AppointmentDateAndTime >= DateTime.Now).OrderBy(p => p.AppointmentDateAndTime).FirstOrDefault();
+        }
         #endregion
 
         #region appointments
         public async Task<List<AppointmentDTO>> GetAppointmentsListAsync(DateTime date)
         {
             return await _connection.QueryAsync<AppointmentDTO>("select A.Id, P.Id as PatientId, P.FirstName, P.LastName, P.Phone, " +
-                                                                "A.AppointmentDate, A.AppointmentTime, A.subject " +
-                                                                "from Appointment A inner join " +
-                                                                "Patient P on A.PatientId = P.Id " +
-                                                                "where A.AppointmentDate = ? " +
-                                                                "order by A.AppointmentTime", date);
+                                                                            "A.AppointmentDate, A.AppointmentTime, A.subject " +
+                                                                            "from Appointment A inner join " +
+                                                                            "Patient P on A.PatientId = P.Id " +
+                                                                            "where A.AppointmentDate = ? " +
+                                                                            "order by A.AppointmentTime", date);
         }
 
         public async Task<Appointment> GetAppointmentAsync(int id)

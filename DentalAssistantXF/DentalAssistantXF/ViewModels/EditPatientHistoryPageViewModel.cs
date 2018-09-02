@@ -73,7 +73,7 @@ namespace DentalAssistantXF.ViewModels
                 if (await _databaseService.DentalAssistantDB.SavePatientDentalprocedureAsync(PatientDentalProcedure) > 0)
                 {
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Dental procedure saved successfully");
-                    MessagingCenter.Send(this, Constants.OnDasboardDataChangeMsg);
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
                 }
             }
             catch (Exception e)

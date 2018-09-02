@@ -10,10 +10,10 @@
         <NavigationPage Title="Navigation menu" Icon="hamburger.png" HasBackButton="False">
             <x:Arguments>
                 <ContentPage NavigationPage.HasNavigationBar="False">
-                    <StackLayout>
-                        <StackLayout Padding="10,20" Orientation="Horizontal" BackgroundColor="#eeeeee">
+                    <StackLayout BackgroundColor="White">
+                        <StackLayout Padding="10,20" Orientation="Horizontal" BackgroundColor="{StaticResource primaryDark}">
                             <Image Source="ic_dental_logo" HorizontalOptions="Start" WidthRequest="60" HeightRequest="60" />
-                            <Label Text="Dentist Assist" FontSize="Large" VerticalOptions="Center" />
+                            <Label Text="Dentist Assist" FontSize="Large" TextColor="White" VerticalOptions="Center" />
                         </StackLayout>
 
                         <ListView ItemsSource="{Binding NavItems}" 
@@ -39,13 +39,6 @@
                             </ListView.ItemTemplate>
                         </ListView>
 
-                        <StackLayout VerticalOptions="EndAndExpand">
-                            <BoxView />
-                            <StackLayout Orientation="Horizontal" Padding="10,2">
-                                <!--<Image Source="copyright.png" />-->
-                                <Label Text="Copyright skyDev 2018" VerticalOptions="Center" FontSize="Micro" />
-                            </StackLayout>
-                        </StackLayout>
                     </StackLayout>
                 </ContentPage>
             </x:Arguments>

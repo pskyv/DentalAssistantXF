@@ -88,6 +88,7 @@ namespace DentalAssistantXF.ViewModels
                 {
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Appointment saved successfully");
                     MessagingCenter.Send(this, Constants.OnAddOrEditAppointmentMsg);
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
                 }
             }
             catch (Exception e)

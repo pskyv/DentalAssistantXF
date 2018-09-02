@@ -133,6 +133,7 @@ namespace DentalAssistantXF.ViewModels
                 {
                     GetAppointmentsAsync();
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Appointment deleted successfully");
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
                 }
             }
             catch

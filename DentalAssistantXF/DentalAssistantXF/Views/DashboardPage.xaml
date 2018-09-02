@@ -8,7 +8,7 @@
              Title="Dashboard"
              Icon="ic_dashboard">
 
-    <StackLayout Padding="10" VerticalOptions="StartAndExpand">
+    <StackLayout Padding="10">
 
         <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
             <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
@@ -18,17 +18,34 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackLayout Style="{StaticResource Strip}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.ColumnSpan="2" Style="{StaticResource Strip}">
                         <Label FontAttributes="Bold" Text="Open cases" />
                     </StackLayout>
+
+                    <Grid Grid.Row="1" VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15,10">
+                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
+                        </StackLayout>
+                        <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding TotalOpen}" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                        </StackLayout>
+                    </Grid>
+
                     <ListView Grid.Row="1"
+                              Grid.Column="1"
                               ItemsSource="{Binding GroupedOpenDentalProcedures}" 
                               SeparatorVisibility="None"
-                              RowHeight="30">
+                              RowHeight="28"
+                              VerticalOptions="Center">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Padding="15,4">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Padding="0,4">
                                         <Label HorizontalTextAlignment="Center"  Text="{Binding DentalProcedureType}" />
                                         <badge:BadgeView Text="{Binding Count}" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End" />
                                     </StackLayout>
@@ -39,7 +56,7 @@
                 </Grid>
             </StackLayout>
         </Frame>
-
+        
         <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
             <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
                 <BoxView Color="#A64C79" WidthRequest="4" Margin="0" />
@@ -88,6 +105,55 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+        <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0" IsVisible="{Binding HasNextAppointment}">
+            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
+                <BoxView Color="{StaticResource accent}" WidthRequest="4" Margin="0" />
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.ColumnSpan="2" Style="{StaticResource Strip}">
+                        <Label FontAttributes="Bold" Text="Next appointment" />
+                    </StackLayout>
+
+                    <Grid Grid.Row="1" VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15,10">
+                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
+                        </StackLayout>
+                        <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding NextAppointment.AppointmentDate, StringFormat='{}{0:d/M/yy}'}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding NextAppointment.AppointmentTime, StringFormat=\{0:h\\:mm\}}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Grid>
+
+                    <ListView Grid.Row="1"
+                              Grid.Column="1"
+                              ItemsSource="{Binding NextAppointments}"
+                              SeparatorVisibility="None"
+                              RowHeight="40"
+                              VerticalOptions="Center">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Spacing="0">
+                                        <Label Text="{Binding FullName}" TextColor="{StaticResource primaryText}" />
+                                        <Label Text="{Binding Subject}" TextColor="{StaticResource secondaryText}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
                 </Grid>
             </StackLayout>
         </Frame>

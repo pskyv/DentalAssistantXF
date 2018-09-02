@@ -28,7 +28,8 @@
                 <Label Text="Is completed" VerticalOptions="Center" />
                 <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding PatientDentalProcedure.IsCompleted, Mode=TwoWay}" />
             </StackLayout>
-            <Picker ItemsSource="{Binding DentalProcedureTypes}" 
+            <Picker Title="Select procedure type" 
+                    ItemsSource="{Binding DentalProcedureTypes}" 
                     SelectedIndex="{Binding SelectedDentalProcedureType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
             <Entry Text="{Binding PatientDentalProcedure.Description}" Placeholder="Description..." />
             <DatePicker Date="{Binding PatientDentalProcedure.StartDate}" Format="dd/MM/yyyy" />

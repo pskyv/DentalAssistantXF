@@ -62,7 +62,7 @@ namespace DentalAssistantXF.ViewModels
         private async void LoginAsync()
         {
             IsChecking = true;
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
 
             if (string.Equals(Password, Preferences.Get("Password", "")))
             {

@@ -70,7 +70,7 @@ namespace DentalAssistantXF.ViewModels
                 if (await _databaseService.DentalAssistantDB.SavePatientFinTradeAsync(PatientFinTrade) > 0)
                 {
                     HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Financial trade saved successfully");
-                    MessagingCenter.Send(this, Constants.OnDasboardDataChangeMsg);
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
                 }
             }
             catch (Exception e)
