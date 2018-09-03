@@ -12,7 +12,7 @@ namespace DentalAssistantXF.Models
         Cleaning,
         Whitening,
         Filling,
-        Root_canal,
+        RootCanal,
         Cap,
         Bridge,
         Denture,

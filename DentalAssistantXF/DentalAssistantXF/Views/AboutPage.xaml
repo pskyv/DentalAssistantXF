@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.AboutPage"
+             Title="About">
+
+    <StackLayout Padding="20,40">
+        <Label Text="Dentist Assist" FontSize="Large" FontAttributes="Bold" />
+        <Label Text="{Binding Version, StringFormat='Version: {0}'}" />
+        <Label Text="Developed by Panos Skyvalidas" Margin="0,40,0,10" />
+        <StackLayout Orientation="Horizontal">
+            <Image Source="ic_email_black_18dp" />
+            <Label Text="panos.skydev@gmail.com" HorizontalOptions="Center" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="ic_twitter_black_24dp" />
+            <Label Text="@pskyv" HorizontalOptions="Center" />
+        </StackLayout>
+    </StackLayout>
+  
+</ContentPage>

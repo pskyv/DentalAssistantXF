@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using DentalAssistantXF.Models;
+using System.Text.RegularExpressions;
 
 namespace DentalAssistantXF.Utils
 {
@@ -26,6 +27,19 @@ namespace DentalAssistantXF.Utils
             toastConfig.SetBackgroundColor(color);
             toastConfig.SetIcon(icon);
             UserDialogs.Instance.Toast(toastConfig);
+        }
+
+        public static string SplitCamelCase(this string str)
+        {
+            return Regex.Replace(
+                Regex.Replace(
+                    str,
+                    @"(\P{Ll})(\P{Ll}\p{Ll})",
+                    "$1 $2"
+                ),
+                @"(\p{Ll})(\P{Ll})",
+                "$1 $2"
+            );
         }
     }
 }

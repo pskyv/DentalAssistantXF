@@ -42,7 +42,7 @@ namespace DentalAssistantXF.ViewModels
 
         public List<string> DentalProcedureTypes
         {
-            get { return Enum.GetNames(typeof(DentalProcedureType)).ToList(); }
+            get { return Enum.GetNames(typeof(DentalProcedureType)).Select(d => d.SplitCamelCase()).ToList(); }
         }
 
         public string Title

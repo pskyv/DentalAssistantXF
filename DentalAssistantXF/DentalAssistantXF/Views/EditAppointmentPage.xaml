@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:SuaveControls.MaterialForms;assembly=SuaveControls.MaterialForms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DentalAssistantXF.Views.EditAppointmentPage"
@@ -26,7 +27,7 @@
             
             <TimePicker Time="{Binding Appointment.AppointmentTime}" Format="HH:mm" />
             
-            <Entry Text="{Binding Appointment.Subject}" Placeholder="Subject..." />
+            <material:MaterialEntry Text="{Binding Appointment.Subject}" Placeholder="Reason..." />
         </StackLayout>
 
     </StackLayout>

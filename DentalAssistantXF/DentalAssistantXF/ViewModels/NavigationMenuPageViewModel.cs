@@ -41,8 +41,9 @@ namespace DentalAssistantXF.ViewModels
         {
             NavItems = new ObservableCollection<NavigationMenuItem>()
             {
-                new NavigationMenuItem {Caption = Constants.MainPageCaption, Page = "MainPage", IconSource = "ic_home.png"},
-                new NavigationMenuItem {Caption = Constants.SettingsPageCaption, Page = "SettingsPage", IconSource = "ic_settings.png"},
+                new NavigationMenuItem {Caption = Constants.MainPageCaption, Page = "MainPage", IconSource = "ic_home"},
+                new NavigationMenuItem {Caption = Constants.SettingsPageCaption, Page = "SettingsPage", IconSource = "ic_settings"},
+                new NavigationMenuItem {Caption = Constants.AboutPageCaption, Page = "AboutPage", IconSource = "ic_information_black_24dp"},
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:SuaveControls.MaterialForms;assembly=SuaveControls.MaterialForms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -26,7 +27,7 @@
             <Picker ItemsSource="{Binding FinTradeTypes}" 
                     SelectedIndex="{Binding SelectedFinTradeType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
             <DatePicker Date="{Binding PatientFinTrade.TradeDate}" Format="dd/MM/yyyy" />
-            <Entry Text="{Binding PatientFinTrade.Ammount}" Placeholder="Ammount..." Keyboard="Numeric" />
+            <material:MaterialEntry Text="{Binding PatientFinTrade.Ammount}" Placeholder="Ammount..." Keyboard="Numeric" />
         </StackLayout>
 
     </StackLayout>
