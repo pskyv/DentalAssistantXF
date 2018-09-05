@@ -7,30 +7,39 @@
              x:Class="DentalAssistantXF.Views.LoginPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Image Source="splash" Aspect="AspectFill" Opacity="0.2" />
-
-        <StackLayout Padding="20,40">
-            <Label Text="Welcome to Dentist Assist" FontSize="Large" />
+        <StackLayout Padding="20,20">
+            <Label Text="Welcome to Dentist Assist" TextColor="{StaticResource primaryDark}" FontSize="24" />
             <Label Text="Sign in to continue" />
+        </StackLayout>
 
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20,100,20,0">
-                <material:MaterialEntry Text="{Binding Password}" Placeholder="Password" Margin="0,0,0,40" />
-                <Button Text="Login" 
+        <StackLayout Grid.Row="1" Padding="30,20">
+            <material:MaterialEntry Text="{Binding Password}" Placeholder="Password" IsPassword="True"  Margin="0,0,0,40" />
+            <Button Text="Login" 
                     BackgroundColor="{StaticResource primary}" 
                     TextColor="white"
                     Command="{Binding LoginCommand}" />
-                <Label Text="Forgot your password?"
+            <Label Text="Forgot your password?"
                        HorizontalOptions="Center"
                        TextColor="{StaticResource primary}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
 
-            <ActivityIndicator IsVisible="True" IsRunning="{Binding IsChecking}" Color="Red" HorizontalOptions="Center" Margin="0,20" />
+            <!--<ActivityIndicator IsVisible="True" 
+                           IsRunning="{Binding IsChecking}" 
+                           Color="{StaticResource primaryDark}" 
+                           HorizontalOptions="Center" 
+                           Margin="0,20" />-->
         </StackLayout>
+
+        <Image Grid.Row="2" Source="tooth" Aspect="AspectFill" Opacity="0.2" />
 
     </Grid>
 
