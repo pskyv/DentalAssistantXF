@@ -24,9 +24,9 @@ namespace DentalAssistantXF
 
         protected override async void OnInitialized()
         {
-            //#if DEBUG
+#if DEBUG
             LiveReload.Init();
-            //#endif
+#endif
 
             InitializeComponent();
 
