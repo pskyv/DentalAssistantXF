@@ -2,94 +2,80 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:badge="clr-namespace:BadgeView.Shared;assembly=BadgeView.Shared"
+             xmlns:controls="clr-namespace:DentalAssistantXF.Controls"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DentalAssistantXF.Views.DashboardPage"
              Title="Dashboard"
-             Icon="ic_dashboard">
+             Icon="ic_dashboard"
+             x:Name="Dashboard">
 
-    <StackLayout Padding="10">
+    <FlexLayout Direction="Column"
+                AlignItems="Center"
+                JustifyContent="SpaceEvenly">
 
-        <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
-            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
-                <BoxView Color="{StaticResource primary}" WidthRequest="4" Margin="0" />
-                <Grid RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <controls:CardLayout HasShadow="True" Icon="ic_format_list_bulleted_black_24dp" CornerRadius="0" Title="Open cases">
+            <controls:CardLayout.CardContent>
+                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackLayout Grid.ColumnSpan="2" Style="{StaticResource Strip}">
-                        <Label FontAttributes="Bold" Text="Open cases" />
-                    </StackLayout>
-
-                    <Grid Grid.Row="1" VerticalOptions="Center">
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15,10">
-                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
+                    <Grid VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
                         </StackLayout>
                         <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label Text="{Binding TotalOpen}" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding BindingContext.TotalOpen, Source={x:Reference Dashboard}}" TextColor="White" FontAttributes="Bold" FontSize="18" />
                         </StackLayout>
                     </Grid>
 
-                    <ListView Grid.Row="1"
-                              Grid.Column="1"
-                              ItemsSource="{Binding GroupedOpenDentalProcedures}" 
+                    <ListView Grid.Column="1"
+                              ItemsSource="{Binding BindingContext.GroupedOpenDentalProcedures, Source={x:Reference Dashboard}}" 
                               SeparatorVisibility="None"
                               RowHeight="28"
-                              VerticalOptions="Center">
+                              VerticalOptions="Center"
+                              Margin="20,0,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Padding="0,4">
-                                        <Label HorizontalTextAlignment="Center"  Text="{Binding DentalProcedureType}" />
+                                        <Label HorizontalTextAlignment="Center" Text="{Binding DentalProcedureType}" />
                                         <badge:BadgeView Text="{Binding Count}" BadgeColor="Red" VerticalOptions="Start" HorizontalOptions="End" />
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </Grid>
-            </StackLayout>
-        </Frame>
-        
-        <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0">
-            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
-                <BoxView Color="#A64C79" WidthRequest="4" Margin="0" />
-                <Grid RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                </Grid>    
+            </controls:CardLayout.CardContent>
+        </controls:CardLayout>
+
+        <controls:CardLayout HasShadow="True" Icon="ic_cash_black_24dp" CornerRadius="0" Title="Total debt" VLineColor="#A64C79">
+            <controls:CardLayout.CardContent>
+                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-                    <StackLayout Grid.ColumnSpan="2" Style="{StaticResource Strip}">
-                        <Label FontAttributes="Bold" Text="Total debt" />
-                    </StackLayout>
-
-                    <Grid Grid.Row="1" VerticalOptions="Center">
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15,10">
-                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
+                    
+                    <Grid VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
                         </StackLayout>
                         <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label Text="{Binding TotalDebt}" TextColor="White" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding BindingContext.TotalDebt, Source={x:Reference Dashboard}}" TextColor="White" FontAttributes="Bold" FontSize="18" />
                             <Image Source="ic_currency_eur_white_18dp" />
                         </StackLayout>
                     </Grid>
 
-                    <ListView Grid.Row="1"
-                              Grid.Column="1"
-                              ItemsSource="{Binding GroupedFinTrades}"
+                    <ListView Grid.Column="1"
+                              ItemsSource="{Binding BindingContext.GroupedFinTrades, Source={x:Reference Dashboard}}"
                               SeparatorVisibility="None"
                               RowHeight="25"
-                              VerticalOptions="Center">
+                              VerticalOptions="Center"
+                              Margin="20,0,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -106,42 +92,33 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
-            </StackLayout>
-        </Frame>
+            </controls:CardLayout.CardContent>
+        </controls:CardLayout>
 
-        <Frame Padding="0" Margin="5" HasShadow="True" CornerRadius="0" IsVisible="{Binding HasNextAppointment}">
-            <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Spacing="0">
-                <BoxView Color="{StaticResource accent}" WidthRequest="4" Margin="0" />
-                <Grid RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+        <controls:CardLayout HasShadow="True" Icon="ic_scheduler" CornerRadius="0" Title="Next appointment" VLineColor="{StaticResource accent}">
+            <controls:CardLayout.CardContent>
+                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackLayout Grid.ColumnSpan="2" Style="{StaticResource Strip}">
-                        <Label FontAttributes="Bold" Text="Next appointment" />
-                    </StackLayout>
-
-                    <Grid Grid.Row="1" VerticalOptions="Center">
-                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15,10">
-                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
+                    <Grid VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
                         </StackLayout>
                         <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Label Text="{Binding NextAppointment.AppointmentDate, StringFormat='{}{0:d/M/yy}'}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
-                            <Label Text="{Binding NextAppointment.AppointmentTime, StringFormat=\{0:h\\:mm\}}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding BindingContext.NextAppointment.AppointmentDate, Source={x:Reference Dashboard}, StringFormat='{}{0:d/M/yy}'}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding BindingContext.NextAppointment.AppointmentTime, Source={x:Reference Dashboard}, StringFormat=\{0:h\\:mm\}}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />
                         </StackLayout>
                     </Grid>
 
-                    <ListView Grid.Row="1"
-                              Grid.Column="1"
-                              ItemsSource="{Binding NextAppointments}"
+                    <ListView Grid.Column="1"
+                              ItemsSource="{Binding BindingContext.NextAppointments, Source={x:Reference Dashboard}}"
                               SeparatorVisibility="None"
                               RowHeight="40"
-                              VerticalOptions="Center">
+                              VerticalOptions="Center"
+                              Margin="20,0,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -155,9 +132,9 @@
                     </ListView>
 
                 </Grid>
-            </StackLayout>
-        </Frame>
+            </controls:CardLayout.CardContent>
+        </controls:CardLayout>
 
-    </StackLayout>
+    </FlexLayout>
 
 </ContentPage>
