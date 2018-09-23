@@ -86,37 +86,21 @@ namespace DentalAssistantXF.ViewModels
         private void SaveSettings()
         {
             Preferences.Set("LoginWithPass", LoginWithPass);
-            Preferences.Set("Email", Email);
-            Preferences.Set("Password", Password);
+            //Preferences.Set("Email", Email);
+            //Preferences.Set("Password", Password);
             HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Settings saved successfully");
-            //try
-            //{
-            //    await SecureStorage.SetAsync("password", Password);
-            //}
-            //catch (Exception ex)
-            //{
-            //    // Possible that device doesn't support secure storage on device.
-            //}
         }
 
         private void Initialization()
         {
             LoginWithPass = Preferences.Get("LoginWithPass", false);
-            if (LoginWithPass)
-            {
-                Email = Preferences.Get("Email", "");
-                Password = Preferences.Get("Password", "");
-                ConfirmPassword = Preferences.Get("Password", "");
-                //try
-                //{
-                //    Password = await SecureStorage.GetAsync("Password");
-                //    ConfirmPassword = await SecureStorage.GetAsync("Password");
-                //}
-                //catch (Exception ex)
-                //{
-
-                //}
-            }
+            CanSave = true;
+            //if (LoginWithPass)
+            //{
+            //    Email = Preferences.Get("Email", "");
+            //    Password = Preferences.Get("Password", "");
+            //    ConfirmPassword = Preferences.Get("Password", "");
+            //}
         }
 
         private void ClearSettings()

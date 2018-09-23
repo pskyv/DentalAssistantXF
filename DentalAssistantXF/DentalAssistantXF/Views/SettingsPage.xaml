@@ -16,12 +16,19 @@
 
     <StackLayout>
 
-        <StackLayout Orientation="Horizontal" Padding="20,20">
-            <Label Text="Login with password" VerticalOptions="Center" />
+        <StackLayout Orientation="Horizontal" Padding="20,20,20,50">
+            <Label Text="Login with Google" VerticalOptions="Center" />
             <Switch x:Name="switch" IsToggled="{Binding LoginWithPass, Mode=TwoWay}" />
         </StackLayout>
+        <Button Text="Save" 
+                BackgroundColor="{StaticResource primary}" 
+                TextColor="White"
+                HorizontalOptions="Center" 
+                WidthRequest="250" 
+                CornerRadius="20"
+                Command="{Binding SaveSettingsCommand}"/>
 
-        <StackLayout IsVisible="{Binding Path=IsToggled, Source={x:Reference switch}}">
+        <!--<StackLayout IsVisible="{Binding Path=IsToggled, Source={x:Reference switch}}">
             <StackLayout Style="{StaticResource Strip}">
                 <Label Text="Password settings" />
             </StackLayout>
@@ -40,7 +47,7 @@
                                      WidthRequest="250" 
                                      CornerRadius="20"
                                      Command="{Binding SaveSettingsCommand}"/>
-        </StackLayout>
+        </StackLayout>-->
 
     </StackLayout>
 
