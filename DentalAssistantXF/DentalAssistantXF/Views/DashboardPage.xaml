@@ -16,7 +16,7 @@
 
         <controls:CardLayout HasShadow="True" Icon="ic_format_list_bulleted_black_24dp" CornerRadius="0" Title="Open cases">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
+                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -54,7 +54,7 @@
 
         <controls:CardLayout HasShadow="True" Icon="ic_cash_black_24dp" CornerRadius="0" Title="Total debt" VLineColor="#A64C79">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
+                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -97,7 +97,7 @@
 
         <controls:CardLayout HasShadow="True" Icon="ic_scheduler" CornerRadius="0" Title="Next appointment" VLineColor="{StaticResource accent}">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,4,2,4">
+                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
