@@ -10,13 +10,13 @@
              Icon="ic_dashboard"
              x:Name="Dashboard">
 
-    <FlexLayout Direction="Column"
-                AlignItems="Center"
-                JustifyContent="SpaceEvenly">
+    <StackLayout HorizontalOptions="Center"
+                 Padding="20"
+                 CompressedLayout.IsHeadless="True">
 
-        <controls:CardLayout HasShadow="True" Icon="ic_format_list_bulleted_black_24dp" CornerRadius="0" Title="Open cases">
+        <controls:CardLayout HasShadow="True" Icon="ic_format_list_bulleted_black_24dp" CornerRadius="0" Title="Open cases" Margin="0,0,0,20">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
+                <Grid Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -52,9 +52,9 @@
             </controls:CardLayout.CardContent>
         </controls:CardLayout>
 
-        <controls:CardLayout HasShadow="True" Icon="ic_cash_black_24dp" CornerRadius="0" Title="Total debt" VLineColor="#A64C79">
+        <controls:CardLayout HasShadow="True" Icon="ic_cash_black_24dp" CornerRadius="0" Title="Total debt" VLineColor="#A64C79" Margin="0,0,0,20">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
+                <Grid Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -97,7 +97,7 @@
 
         <controls:CardLayout HasShadow="True" Icon="ic_scheduler" CornerRadius="0" Title="Next appointment" VLineColor="{StaticResource accent}">
             <controls:CardLayout.CardContent>
-                <Grid BackgroundColor="#fffefd" Padding="10,5,2,5">
+                <Grid Padding="10,5,2,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -135,6 +135,6 @@
             </controls:CardLayout.CardContent>
         </controls:CardLayout>
 
-    </FlexLayout>
+    </StackLayout>
 
 </ContentPage>

@@ -18,6 +18,14 @@
             <Image Source="ic_twitter_black_24dp" />
             <Label Text="@pskyv" HorizontalOptions="Center" />
         </StackLayout>
+        <Label Margin="0,40,0,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Access token expires at: " />
+                    <Span Text="{Binding AccessTokenExpires, StringFormat='{}{0:d/M/yy HH:mm}'}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
     </StackLayout>
   
 </ContentPage>

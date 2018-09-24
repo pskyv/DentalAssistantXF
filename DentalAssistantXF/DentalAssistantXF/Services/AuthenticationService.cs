@@ -58,7 +58,7 @@ namespace DentalAssistantXF.Services
                 Preferences.Set("ExpiryDate", DateTime.Now.AddSeconds(expiresIn));
 
                 await NavigateToPageAsync();
-                //DependencyService.Get<IActivityService>().StartActivity();
+                DependencyService.Get<IActivityService>().StartActivity();
             }
         }
 

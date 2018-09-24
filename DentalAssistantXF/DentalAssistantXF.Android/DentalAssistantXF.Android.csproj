@@ -108,6 +108,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\SQLiteDb.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,5 +15,7 @@ namespace DentalAssistantXF.ViewModels
         }
 
         public string Version { get { return AppInfo.VersionString; } }
+
+        public DateTime AccessTokenExpires { get { return Preferences.Get("ExpiryDate", DateTime.Now); } }
     }
 }

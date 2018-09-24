@@ -117,7 +117,7 @@ namespace DentalAssistantXF.ViewModels
 
         private async void AddPatient()
         {
-            var patient = new Patient() { BirthDate = DateTime.Today };
+            var patient = new Patient();
             var navParams = new NavigationParameters();
             navParams.Add("Patient", patient);
             await _navigationService.NavigateAsync("EditPatientPage", navParams);
