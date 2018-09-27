@@ -17,7 +17,7 @@
     </ContentPage.Resources>
 
     <Grid>
-        <!--<Image Aspect="AspectFit" Source="dentistBackground" Opacity="0.1" />-->
+        <!--<Image Aspect="AspectFill" Source="splash" Opacity="0.1" />-->
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ListView x:Name="timelineListView"
                       ItemsSource="{Binding PatientDentalProcedures}"
@@ -30,15 +30,15 @@
                     <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding AddOrEditPatientDentalProcedureCommand}" CommandParameter="Edit"/>
                 </ListView.Behaviors>
                 <ListView.Header>
-                    <StackLayout Spacing="0" Margin="20,10,20,20">
+                    <StackLayout Spacing="0" Margin="20,10,20,30">
                         <Label Text="{Binding Path=BindingContext.CurrentPatient.FullName, Source={x:Reference PatientTimeline}}" FontSize="28" />
                         <Label Text="Timeline of dental procedures" TextColor="{StaticResource secondaryText}" FontSize="14" />
                     </StackLayout>
                 </ListView.Header>
 
-                <ListView.Footer>
+                <!--<ListView.Footer>
                     <Image Aspect="AspectFill" Source="dentistBackground" Opacity="0.1" />
-                </ListView.Footer>
+                </ListView.Footer>-->
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

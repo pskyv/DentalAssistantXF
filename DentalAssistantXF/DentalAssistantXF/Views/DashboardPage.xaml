@@ -16,7 +16,7 @@
 
         <controls:CardLayout HasShadow="True" Icon="ic_format_list_bulleted_black_24dp" CornerRadius="0" Title="Open cases" Margin="0,0,0,20">
             <controls:CardLayout.CardContent>
-                <Grid Padding="10,5,2,5">
+                <Grid Padding="10,8,2,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />

@@ -18,24 +18,25 @@
             </Grid.RowDefinitions>
 
             <!--  header background  -->
-            <Image Aspect="AspectFill" Source="dentistBackground.png" Opacity="0.5" HeightRequest="200" />
+            <Image Aspect="AspectFill" Source="tooth" Opacity="0.1" Grid.RowSpan="4" /> <!--HeightRequest = "200"-->
 
             <!--  profile image  -->
             <controls:CircleImage Aspect="AspectFill" 
-                                  Source="{Binding CurrentPatient.ProfilePhotoSrc}" 
-                                  TranslationY="50" 
+                                  Source="{Binding CurrentPatient.ProfilePhotoSrc}"                                    
                                   HeightRequest="120" 
                                   WidthRequest="120"
                                   HorizontalOptions="Center"
-                                  VerticalOptions="End" />
+                                  Margin="0,20,0,0"/>
+                                  <!--TranslationY="50"
+                                  VerticalOptions="End" />-->
 
-            <Button Image="ic_arrow_left_white_24dp" 
+            <Button Image="ic_arrow_left_black_24dp" 
                     VerticalOptions="Start" 
                     HorizontalOptions="Start" 
                     WidthRequest="60" 
                     BackgroundColor="Transparent" 
                     Command="{Binding NavigateBackCommand}" />
-            <Button Image="ic_dots_vertical_white_18dp.png" 
+            <Button Image="ic_dots_vertical_black_18dp" 
                     VerticalOptions="Start" 
                     HorizontalOptions="End" 
                     WidthRequest="60" 
@@ -43,7 +44,7 @@
                     Command="{Binding ShowPatientActionsCommand}" />
 
             <!--  Profile Name  -->
-            <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
+            <StackLayout Grid.Row="1" Margin="0,10,0,0" HorizontalOptions="Center">
                 <Label Text="{Binding CurrentPatient.FullName}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontSize="Large" />
             </StackLayout>
 
@@ -58,20 +59,18 @@
                         HorizontalOptions="Center" 
                         BackgroundColor="{StaticResource primary}" 
                         TextColor="White" 
-                        WidthRequest="120" 
-                        FontSize="12" 
+                        WidthRequest="140"                          
                         HeightRequest="40"
                         Image="ic_history_white_18dp"
                         Command="{Binding NavigateToPatientDetailsCommand}" 
                         CommandParameter="PatientHistoryPage" />
-                <Button Grid.Column="1" 
+                <Button Grid.Column="1"
                         Text="Financial" 
                         CornerRadius="20" 
                         HorizontalOptions="Center" 
                         BackgroundColor="{StaticResource primary}" 
                         TextColor="White" 
-                        WidthRequest="120" 
-                        FontSize="12" 
+                        WidthRequest="140"                         
                         HeightRequest="40"
                         Image="ic_cash_white_18dp"
                         Command="{Binding NavigateToPatientDetailsCommand}" 
@@ -86,12 +85,12 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Spacing="0">
-                    <Label Text="{Binding Cases}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="{Binding Cases}" HorizontalOptions="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
                     <Label Text="Dental Cases" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
-                    <Label Text="{Binding Balance}" HorizontalTextAlignment="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="{Binding Balance}" HorizontalOptions="Center" TextColor="{StaticResource primaryText}" FontAttributes="Bold" FontSize="18" />
                     <Label Text="Financial Balance" HorizontalTextAlignment="Center" TextColor="{StaticResource secondaryText}" />
                 </StackLayout>
             </Grid>
