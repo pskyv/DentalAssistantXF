@@ -43,6 +43,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Icon="ic_delete_white_24dp" 
+                                      IsDestructive="True" 
+                                      Command="{Binding BindingContext.DeleteProcedureCommand, Source={x:Reference PatientTimeline}}" 
+                                      CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
                             <Grid ColumnSpacing="0" RowSpacing="0" Padding="20,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100" />

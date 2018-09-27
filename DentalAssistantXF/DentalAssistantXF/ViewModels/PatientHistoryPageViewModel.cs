@@ -47,6 +47,17 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<string> AddOrEditPatientDentalProcedureCommand { get; }
 
+        public DelegateCommand<PatientDentalProcedure> DeleteProcedureCommand => new DelegateCommand<PatientDentalProcedure>(async (args) =>
+        {
+            if (await _databaseService.DentalAssistantDB.DeleteProcedureAsync(args) > 0)
+            {
+                PatientDentalProcedures.Remove(args);
+                HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Dental procedure deleted successfully");
+                MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
+                MessagingCenter.Send(this, Constants.OnAddOrEditPatientMsg);
+            }
+        });
+
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             if(parameters != null)

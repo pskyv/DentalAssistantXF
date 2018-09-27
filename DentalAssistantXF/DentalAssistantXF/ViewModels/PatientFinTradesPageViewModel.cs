@@ -54,6 +54,16 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<string> AddOrEditFinTradeCommand { get; }
 
+        public DelegateCommand<FinTrade> DeleteFinTradeCommand => new DelegateCommand<FinTrade>(async (args) => 
+        {
+            if(await _databaseService.DentalAssistantDB.DeleteFinTradeAsync(args) > 0)
+            {
+                FinTrades.Remove(args);
+                HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Financial trade deleted successfully");
+                MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
+            }
+        });
+
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             if (parameters != null)

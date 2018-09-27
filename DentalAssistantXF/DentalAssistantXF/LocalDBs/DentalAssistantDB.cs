@@ -75,6 +75,11 @@ namespace XFPrismDemo.LocalDBs
                 return await _connection.UpdateAsync(procedure);
             }
         }
+
+        public async Task<int> DeleteProcedureAsync(PatientDentalProcedure procedure)
+        {
+            return await _connection.DeleteAsync(procedure);
+        }
         #endregion
 
         #region FinTrades
@@ -99,6 +104,11 @@ namespace XFPrismDemo.LocalDBs
             {
                 return await _connection.UpdateAsync(finTrade);
             }
+        }
+
+        public async Task<int> DeleteFinTradeAsync(FinTrade finTrade)
+        {
+            return await _connection.DeleteAsync(finTrade);
         }
         #endregion
 

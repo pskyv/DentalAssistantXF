@@ -29,7 +29,9 @@ namespace DentalAssistantXF.ViewModels
             NextAppointments = new ObservableCollection<AppointmentDTO>();
 
             MessagingCenter.Subscribe<DashboardPage>(this, Constants.OnDashboardPageAppearingMsg, (sender) => { LoadDashboardData(); });
-            MessagingCenter.Subscribe<EditPatientFinTradePageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadFinTradeDataAsync(); });
+            MessagingCenter.Subscribe<PatientFinTradesPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadFinTradeDataAsync(); });
+            MessagingCenter.Subscribe<EditPatientFinTradePageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadFinTradeDataAsync(); });            
+            MessagingCenter.Subscribe<PatientHistoryPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadOpenProceduresDataAsync(); });
             MessagingCenter.Subscribe<EditPatientHistoryPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadOpenProceduresDataAsync(); });
             MessagingCenter.Subscribe<EditAppointmentPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadSchedulerDataAsync(); });
             MessagingCenter.Subscribe<AppointmentsListPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadSchedulerDataAsync(); });

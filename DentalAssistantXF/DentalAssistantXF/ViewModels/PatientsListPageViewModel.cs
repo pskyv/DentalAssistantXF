@@ -40,6 +40,7 @@ namespace DentalAssistantXF.ViewModels
             //Refresh patients list after adding or editing patient
             MessagingCenter.Subscribe<EditPatientPageViewModel>(this, Constants.OnAddOrEditPatientMsg, (sender) => { GetPatientsAsync(); });
             MessagingCenter.Subscribe<EditPatientHistoryPageViewModel>(this, Constants.OnAddOrEditPatientMsg, (sender) => { GetPatientsAsync(); });
+            MessagingCenter.Subscribe<PatientHistoryPageViewModel>(this, Constants.OnAddOrEditPatientMsg, (sender) => { GetPatientsAsync(); });
         }        
 
         public Patient SelectedPatient
