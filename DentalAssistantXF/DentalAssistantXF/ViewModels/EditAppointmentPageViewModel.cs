@@ -81,6 +81,12 @@ namespace DentalAssistantXF.ViewModels
 
         private async void SaveAppointment()
         {
+            if(SelectedPatient == null)
+            {
+                HelperFunctions.ShowToastMessage(ToastMessageType.Error, "You have to select a patient first");
+                return;
+            }
+
             Appointment.PatientId = SelectedPatient.Id;
             try
             {
