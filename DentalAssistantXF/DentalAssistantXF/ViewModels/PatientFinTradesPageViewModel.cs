@@ -5,6 +5,7 @@ using DentalAssistantXF.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,14 +17,16 @@ namespace DentalAssistantXF.ViewModels
 	public class PatientFinTradesPageViewModel : BindableBase, INavigatingAware
 	{
         private readonly INavigationService _navigationService;
+        private readonly IPageDialogService _pageDialogService;
         private readonly IDatabaseService _databaseService;
         private FinTrade _selectedFinTrade;
         private Patient _currentPatient;
         private decimal _patientBalance;
 
-        public PatientFinTradesPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public PatientFinTradesPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IDatabaseService databaseService)
         {
             _navigationService = navigationService;
+            _pageDialogService = pageDialogService;
             _databaseService = databaseService;
 
             MessagingCenter.Subscribe<PatientFinTradesPage>(this, Constants.OnPatientFinTradesPageAppearingMsg, (sender) => { GetPatientFinTradesAsync(); }); 
@@ -56,11 +59,15 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<FinTrade> DeleteFinTradeCommand => new DelegateCommand<FinTrade>(async (args) => 
         {
-            if(await _databaseService.DentalAssistantDB.DeleteFinTradeAsync(args) > 0)
+            if (await _pageDialogService.DisplayAlertAsync("Alert", "Are you sure you want to delete this financial trade?", "Yes", "Cancel"))
             {
-                FinTrades.Remove(args);
-                HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Financial trade deleted successfully");
-                MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
+                if (await _databaseService.DentalAssistantDB.DeleteFinTradeAsync(args) > 0)
+                {
+                    FinTrades.Remove(args);
+                    PatientBalance = FinTrades.Sum(f => f.AmmountForSum);
+                    HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Financial trade deleted successfully");
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
+                }
             }
         });
 
@@ -77,10 +84,7 @@ namespace DentalAssistantXF.ViewModels
             var finTrades = await _databaseService.DentalAssistantDB.GetPatientFinTradesAsync(CurrentPatient.Id);
 
             FinTrades.Clear();
-            foreach(var finTrade in finTrades)
-            {
-                FinTrades.Add(finTrade);
-            }
+            finTrades.ForEach(FinTrades.Add);
 
             PatientBalance = FinTrades.Sum(f => f.AmmountForSum);
         }

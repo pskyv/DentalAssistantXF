@@ -83,7 +83,7 @@ namespace XFPrismDemo.LocalDBs
         #endregion
 
         #region FinTrades
-        public async Task<IEnumerable<FinTrade>> GetPatientFinTradesAsync(int patientId)
+        public async Task<List<FinTrade>> GetPatientFinTradesAsync(int patientId)
         {
             return await _connection.QueryAsync<FinTrade>("select * from FinTrade where PatientId =? order by TradeDate desc", patientId);
         }
