@@ -18,12 +18,12 @@
         <ToolbarItem Text="Create financial trade" Order="Secondary" Command="{Binding CreateFinTradeCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
+    <StackLayout CompressedLayout.IsHeadless="True">
 
-        <StackLayout Style="{StaticResource Strip}">
+        <!--<StackLayout Style="{StaticResource Strip}">
             <Label Text="Dental procedure information" />
-        </StackLayout>
-        <StackLayout Padding="15,0">
+        </StackLayout>-->
+        <StackLayout Padding="15,10" CompressedLayout.IsHeadless="True">
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                 <Label Text="Is completed" VerticalOptions="Center" />
                 <Switch HorizontalOptions="EndAndExpand" IsToggled="{Binding PatientDentalProcedure.IsCompleted, Mode=TwoWay}" />
@@ -31,6 +31,25 @@
             <Picker Title="Select procedure type" 
                     ItemsSource="{Binding DentalProcedureTypes}" 
                     SelectedIndex="{Binding SelectedDentalProcedureType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
+            <StackLayout Orientation="Horizontal" CompressedLayout.IsHeadless="True">
+                <Label Text="Teeth:" Style="{StaticResource ClassNameLabel}" VerticalOptions="Center" />
+                <Label Text="{Binding TeethNumbers}" Style="{StaticResource ClassNameLabel}" VerticalOptions="Center" />
+                <!--<Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Teeth:" />
+                            <Span Text="{Binding TeethNumbers}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>-->
+                <Button Text="Show denture" 
+                        HorizontalOptions="EndAndExpand" 
+                        BackgroundColor="{StaticResource primary}" 
+                        TextColor="White"
+                        Image="ic_tooth_outline_white_18dp"
+                        Command="{Binding ShowDentureCommand}"
+                        HeightRequest="40"
+                        CornerRadius="20"/>
+            </StackLayout>
             <Entry Text="{Binding PatientDentalProcedure.Description}" Placeholder="Description..." />
             <DatePicker Date="{Binding PatientDentalProcedure.StartDate}" Format="dd/MM/yyyy" />
         </StackLayout>

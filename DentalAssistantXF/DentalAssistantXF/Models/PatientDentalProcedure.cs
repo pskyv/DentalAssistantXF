@@ -1,5 +1,7 @@
 ﻿using SQLite;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DentalAssistantXF.Models
 {
@@ -11,6 +13,8 @@ namespace DentalAssistantXF.Models
         public int PatientId { get; set; }
 
         public DentalProcedureType DentalProcedure { get; set; }
+
+        public string TeethNumbers { get; set; }
 
         public string Description { get; set; }
 
@@ -24,5 +28,19 @@ namespace DentalAssistantXF.Models
 
         [Ignore]
         public bool IsLast { get; set; }
+
+        [Ignore]
+        public List<int> TeethList
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(TeethNumbers))
+                {
+                    return new List<int>();
+                }
+
+                return TeethNumbers.Split(',').Select(int.Parse).ToList();
+            }
+        }
     }
 }

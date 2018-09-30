@@ -69,6 +69,7 @@ namespace DentalAssistantXF
 
             containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
             containerRegistry.RegisterSingleton(typeof(IAuthenticationService), typeof(AuthenticationService));
+            containerRegistry.RegisterForNavigation<DenturePage>();
         }
     }
 }

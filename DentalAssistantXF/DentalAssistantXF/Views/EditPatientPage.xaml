@@ -30,7 +30,7 @@
             <StackLayout Padding="15,0">
                 <material:MaterialEntry Text="{Binding Patient.FirstName}" Placeholder="First name..." />
                 <material:MaterialEntry Text="{Binding Patient.LastName}" Placeholder="Last name..." />
-                <material:MaterialEntry Text="{Binding Patient.Age}" Placeholder="Age..." />
+                <material:MaterialEntry Text="{Binding Patient.Age}" Placeholder="Age..." Keyboard="Numeric" />
                 <material:MaterialEntry Text="{Binding Patient.Occupation}" Placeholder="Occupation..." />
             </StackLayout>
 
@@ -38,8 +38,8 @@
                 <Label Text="Contact information" />
             </StackLayout>
             <StackLayout Padding="15,0">
-                <material:MaterialEntry Text="{Binding Patient.Phone}" Placeholder="Phone..." />
-                <material:MaterialEntry Text="{Binding Patient.Email}" Placeholder="Email..." />
+                <material:MaterialEntry Text="{Binding Patient.Phone}" Placeholder="Phone..." Keyboard="Telephone" />
+                <material:MaterialEntry Text="{Binding Patient.Email}" Placeholder="Email..." Keyboard="Email" />
                 <material:MaterialEntry Text="{Binding Patient.Address}" Placeholder="Address..." />
             </StackLayout>
 

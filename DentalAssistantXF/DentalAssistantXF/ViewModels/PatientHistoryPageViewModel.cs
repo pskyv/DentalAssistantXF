@@ -20,13 +20,14 @@ namespace DentalAssistantXF.ViewModels
         private readonly IPageDialogService _pageDialogService;
         private readonly IDatabaseService _databaseService;
         private Patient _currentPatient;
+        private string _title;
         private PatientDentalProcedure _selectedPatientDentalProcedure;
 
         public PatientHistoryPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IDatabaseService databaseService)
         {
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-            _databaseService = databaseService;
+            _databaseService = databaseService;            
 
             MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetPatienDentalOperationsAsync(); }); //{ GetPatienDentalOperationsAsync(); });
 
@@ -38,6 +39,12 @@ namespace DentalAssistantXF.ViewModels
         {
             get { return _currentPatient; }
             set { SetProperty(ref _currentPatient, value); }
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         public PatientDentalProcedure SelectedPatientDentalProcedure
@@ -69,6 +76,7 @@ namespace DentalAssistantXF.ViewModels
             if(parameters != null)
             {
                 CurrentPatient = (Patient)parameters["Patient"];
+                Title = CurrentPatient.FullName + " timeline";
             }
         }
 
