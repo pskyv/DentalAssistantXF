@@ -7972,26 +7972,8 @@ namespace DentalAssistantXF.Droid
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f02015c
-			public const int avd_hide_password_1 = 2130837852;
-			
-			// aapt resource value: 0x7f02015d
-			public const int avd_hide_password_2 = 2130837853;
-			
-			// aapt resource value: 0x7f02015e
-			public const int avd_hide_password_3 = 2130837854;
-			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
-			
-			// aapt resource value: 0x7f02015f
-			public const int avd_show_password_1 = 2130837855;
-			
-			// aapt resource value: 0x7f020160
-			public const int avd_show_password_2 = 2130837856;
-			
-			// aapt resource value: 0x7f020161
-			public const int avd_show_password_3 = 2130837857;
 			
 			// aapt resource value: 0x7f020056
 			public const int denture250 = 2130837590;

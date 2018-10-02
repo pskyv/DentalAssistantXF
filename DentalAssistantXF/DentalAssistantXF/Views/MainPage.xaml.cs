@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace DentalAssistantXF.Views
 {
@@ -12,11 +9,15 @@ namespace DentalAssistantXF.Views
 		public MainPage ()
 		{
 			InitializeComponent ();
-		}
 
-        protected override bool OnBackButtonPressed()
-        {
-            return base.OnBackButtonPressed();
+            if (DeviceInfo.Platform == "Android")
+            {
+                if (DeviceInfo.Version.Major >= 7 && DeviceInfo.Version.Minor >= 1)
+                {
+                    On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);                    
+                }
+            }
+
         }
     }
 }

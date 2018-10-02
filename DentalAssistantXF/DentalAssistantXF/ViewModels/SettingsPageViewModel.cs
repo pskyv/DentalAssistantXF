@@ -81,7 +81,7 @@ namespace DentalAssistantXF.ViewModels
             }
         }
 
-        public DelegateCommand SaveSettingsCommand => new DelegateCommand(SaveSettings).ObservesCanExecute(() => CanSave);
+        public DelegateCommand SaveSettingsCommand => new DelegateCommand(SaveSettings);
 
         private void SaveSettings()
         {
@@ -107,9 +107,9 @@ namespace DentalAssistantXF.ViewModels
         {
             Preferences.Clear();
             //SecureStorage.Remove("Password");
-            Email = string.Empty;
-            Password = string.Empty;
-            ConfirmPassword = string.Empty;
+            //Email = string.Empty;
+            //Password = string.Empty;
+            //ConfirmPassword = string.Empty;
         }
 
         private bool ValidateEmail(string emailAddress)

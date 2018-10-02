@@ -27,7 +27,7 @@ namespace DentalAssistantXF.ViewModels
         {
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-            _databaseService = databaseService;            
+            _databaseService = databaseService;                             
 
             MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetPatienDentalOperationsAsync(); }); //{ GetPatienDentalOperationsAsync(); });
 
