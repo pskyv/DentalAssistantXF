@@ -31,8 +31,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame Padding="0" HasShadow="True" CornerRadius="0" Margin="20,0">
-                                <StackLayout Orientation="Horizontal" Spacing="0" Padding="0,0,0,10">
+                            <Frame Padding="0" HasShadow="True" CornerRadius="0" Margin="20,0,20,10">
+                                <StackLayout Orientation="Horizontal" Spacing="0">
                                     <BoxView Color="{Binding Color}" WidthRequest="4" Margin="0" />
                                     <Grid RowSpacing="0" HorizontalOptions="FillAndExpand">
                                         <Grid.RowDefinitions>

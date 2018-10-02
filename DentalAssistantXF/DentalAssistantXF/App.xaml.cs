@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using Prism.Unity;
 using DentalAssistantXF.Services;
 using Xamarin.Essentials;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DentalAssistantXF
@@ -30,13 +31,20 @@ namespace DentalAssistantXF
 
             InitializeComponent();
 
-            if (Preferences.Get("LoginWithPass", false))
+            if (!Preferences.Get("LoginWithPass", false))
             {
-                await NavigationService.NavigateAsync("LoginPage");
+                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");                
             }
             else
             {
-                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+                if (Preferences.Get("IsLoggedIn", false) && DateTime.Now < Preferences.Get("ExpiryDate", DateTime.Now))
+                {
+                    await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+                }
+                else
+                {
+                    await NavigationService.NavigateAsync("LoginPage");
+                }
             }
         }
 
@@ -47,9 +55,7 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<PatientProfilePage>();
             containerRegistry.RegisterForNavigation<PatientsListPage>();
-            containerRegistry.RegisterForNavigation<EditPatientPage>();
-
-            containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
+            containerRegistry.RegisterForNavigation<EditPatientPage>();            
             containerRegistry.RegisterForNavigation<PatientHistoryPage>();
             containerRegistry.RegisterForNavigation<EditPatientHistoryPage>();
             containerRegistry.RegisterForNavigation<PatientFinTradesPage>();
@@ -60,6 +66,10 @@ namespace DentalAssistantXF
             containerRegistry.RegisterForNavigation<SettingsPage>();
             containerRegistry.RegisterForNavigation<LoginPage>();
             containerRegistry.RegisterForNavigation<AboutPage>();
+
+            containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
+            containerRegistry.RegisterSingleton(typeof(IAuthenticationService), typeof(AuthenticationService));
+            containerRegistry.RegisterForNavigation<DenturePage>();
         }
     }
 }

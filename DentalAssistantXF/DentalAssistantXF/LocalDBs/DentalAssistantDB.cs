@@ -75,10 +75,15 @@ namespace XFPrismDemo.LocalDBs
                 return await _connection.UpdateAsync(procedure);
             }
         }
+
+        public async Task<int> DeleteProcedureAsync(PatientDentalProcedure procedure)
+        {
+            return await _connection.DeleteAsync(procedure);
+        }
         #endregion
 
         #region FinTrades
-        public async Task<IEnumerable<FinTrade>> GetPatientFinTradesAsync(int patientId)
+        public async Task<List<FinTrade>> GetPatientFinTradesAsync(int patientId)
         {
             return await _connection.QueryAsync<FinTrade>("select * from FinTrade where PatientId =? order by TradeDate desc", patientId);
         }
@@ -99,6 +104,11 @@ namespace XFPrismDemo.LocalDBs
             {
                 return await _connection.UpdateAsync(finTrade);
             }
+        }
+
+        public async Task<int> DeleteFinTradeAsync(FinTrade finTrade)
+        {
+            return await _connection.DeleteAsync(finTrade);
         }
         #endregion
 

@@ -7,7 +7,7 @@
              xmlns:cv="clr-namespace:DentalAssistantXF.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DentalAssistantXF.Views.PatientHistoryPage"
-             Title="Patient history"
+             Title="{Binding Title}"
              x:Name="PatientTimeline">
 
     <ContentPage.Resources>
@@ -17,33 +17,72 @@
     </ContentPage.Resources>
 
     <Grid>
-        <!--<Image Aspect="AspectFit" Source="dentistBackground" Opacity="0.1" />-->
+        <!--<Image Aspect="AspectFill" Source="splash" Opacity="0.1" />-->
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ListView x:Name="timelineListView"
                       ItemsSource="{Binding PatientDentalProcedures}"
                       SelectedItem="{Binding SelectedPatientDentalProcedure, Mode=TwoWay}"
-                      RowHeight="75"
                       SeparatorVisibility="None"
+                      HasUnevenRows="True"
                       AbsoluteLayout.LayoutFlags="All"
-			          AbsoluteLayout.LayoutBounds="0,0,1,1">
+			          AbsoluteLayout.LayoutBounds="0,0,1,1"
+                      Margin="0,20,0,0">
                 <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding AddOrEditPatientDentalProcedureCommand}" CommandParameter="Edit"/>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                                                      Command="{Binding AddOrEditPatientDentalProcedureCommand}" 
+                                                      CommandParameter="Edit"/>
                 </ListView.Behaviors>
-                <ListView.Header>
-                    <StackLayout Spacing="0" Margin="20,10,20,20">
+                
+                <!--<ListView.Header>
+                    <StackLayout Spacing="0" Margin="20,10,20,30">
                         <Label Text="{Binding Path=BindingContext.CurrentPatient.FullName, Source={x:Reference PatientTimeline}}" FontSize="28" />
                         <Label Text="Timeline of dental procedures" TextColor="{StaticResource secondaryText}" FontSize="14" />
                     </StackLayout>
-                </ListView.Header>
+                </ListView.Header>-->
 
-                <ListView.Footer>
-                    <Image Aspect="AspectFill" Source="dentistBackground" Opacity="0.1" />
-                </ListView.Footer>
+                <!--<ListView.Footer>
+                    <Image Aspect="AspectFit" Source="denture250" />
+                </ListView.Footer>-->
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnSpacing="0" RowSpacing="0" Padding="20,0,0,0">
+                            <ViewCell.ContextActions>
+                                <MenuItem Icon="ic_delete_white_24dp" 
+                                      IsDestructive="True" 
+                                      Command="{Binding BindingContext.DeleteProcedureCommand, Source={x:Reference PatientTimeline}}" 
+                                      CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                            <Grid Padding="40,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label HorizontalOptions="Center" 
+                                       Style="{StaticResource ClassTimeLabel}" 
+                                       Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                       VerticalOptions="Start"/>
+                                <BoxView Grid.Column="1"
+                                         WidthRequest="3"
+                                         BackgroundColor="{StaticResource primary}"
+                                         Margin="8,0,0,0"/>
+                                <StackLayout Grid.Column="2" 
+                                             VerticalOptions="StartAndExpand"
+                                             Margin="15,0,0,0"
+                                             Spacing="0">
+                                    <Label Style="{StaticResource ClassNameLabel}" Text="{Binding DentalProcedure}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Teeth:" Style="{StaticResource SecondaryTextLabel}" />
+                                        <Label Text="{Binding TeethNumbers}" Style="{StaticResource SecondaryTextLabel}" />
+                                    </StackLayout>
+                                    <Label Text="{Binding Description}" Style="{StaticResource SecondaryTextLabel}"  />
+                                </StackLayout>
+
+                            </Grid>
+                            
+                            <!--<Grid ColumnSpacing="0" RowSpacing="0" Padding="20,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="30" />
@@ -71,7 +110,7 @@
 
                                 <Image Grid.Column="1" Source="ic_openCase" VerticalOptions="Start" />
 
-                            </Grid>
+                            </Grid>-->
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

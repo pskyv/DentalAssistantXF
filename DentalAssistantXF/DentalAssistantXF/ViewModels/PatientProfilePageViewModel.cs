@@ -96,14 +96,17 @@ namespace DentalAssistantXF.ViewModels
 
         private void CallPatient()
         {
+            if(string.IsNullOrEmpty(CurrentPatient.Phone))
+            {
+                HelperFunctions.ShowToastMessage(ToastMessageType.Error, "There's no registered phone number");
+                return;
+            }
+
             try
             {
                 PhoneDialer.Open(CurrentPatient.Phone);
             }
-            catch (ArgumentNullException anEx)
-            {
-                // Number was null or white space
-            }
+
             catch (FeatureNotSupportedException ex)
             {
                 // Phone Dialer is not supported on this device.

@@ -18,11 +18,8 @@ namespace DentalAssistantXF.Models
         public string FullName => LastName + " " + FirstName;
 
         public string Occupation { get; set; }
-        
-        public DateTime BirthDate { get; set; }
 
-        [Ignore]
-        public int Age => DateTime.Today.Year - BirthDate.Year;
+        public int Age { get; set; }
 
         public string Phone { get; set; }
 

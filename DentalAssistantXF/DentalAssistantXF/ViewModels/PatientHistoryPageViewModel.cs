@@ -5,6 +5,7 @@ using DentalAssistantXF.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,14 +17,17 @@ namespace DentalAssistantXF.ViewModels
 	public class PatientHistoryPageViewModel : BindableBase, INavigatingAware
 	{
         private readonly INavigationService _navigationService;
+        private readonly IPageDialogService _pageDialogService;
         private readonly IDatabaseService _databaseService;
         private Patient _currentPatient;
+        private string _title;
         private PatientDentalProcedure _selectedPatientDentalProcedure;
 
-        public PatientHistoryPageViewModel(INavigationService navigationService, IDatabaseService databaseService)
+        public PatientHistoryPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IDatabaseService databaseService)
         {
             _navigationService = navigationService;
-            _databaseService = databaseService;
+            _pageDialogService = pageDialogService;
+            _databaseService = databaseService;                             
 
             MessagingCenter.Subscribe<PatientHistoryPage>(this, Constants.OnPatientHistoryPageAppearingMsg, (sender) => { GetPatienDentalOperationsAsync(); }); //{ GetPatienDentalOperationsAsync(); });
 
@@ -37,6 +41,12 @@ namespace DentalAssistantXF.ViewModels
             set { SetProperty(ref _currentPatient, value); }
         }
 
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
         public PatientDentalProcedure SelectedPatientDentalProcedure
         {
             get { return _selectedPatientDentalProcedure; }
@@ -47,11 +57,26 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand<string> AddOrEditPatientDentalProcedureCommand { get; }
 
+        public DelegateCommand<PatientDentalProcedure> DeleteProcedureCommand => new DelegateCommand<PatientDentalProcedure>(async (args) =>
+        {
+            if (await _pageDialogService.DisplayAlertAsync("Alert", "Are you sure you want to delete this procedure?", "Yes", "Cancel"))
+            {
+                if (await _databaseService.DentalAssistantDB.DeleteProcedureAsync(args) > 0)
+                {
+                    GetPatienDentalOperationsAsync();
+                    HelperFunctions.ShowToastMessage(ToastMessageType.Success, "Dental procedure deleted successfully");
+                    MessagingCenter.Send(this, Constants.OnDashboardDataChangeMsg);
+                    MessagingCenter.Send(this, Constants.OnAddOrEditPatientMsg);
+                }
+            }
+        });
+
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             if(parameters != null)
             {
                 CurrentPatient = (Patient)parameters["Patient"];
+                Title = CurrentPatient.FullName + " timeline";
             }
         }
 
@@ -62,13 +87,9 @@ namespace DentalAssistantXF.ViewModels
             {
                 procedures.Last().IsLast = true;
             }
-
-            PatientDentalProcedures.Clear();
             
-            foreach(var procedure in procedures)
-            {
-                PatientDentalProcedures.Add(procedure);
-            }
+            PatientDentalProcedures.Clear();
+            procedures.ForEach(PatientDentalProcedures.Add);
         }
 
         private async void AddOrEditPatientDentalProcedureAsync(string mode = "Edit")

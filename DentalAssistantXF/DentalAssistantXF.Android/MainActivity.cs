@@ -9,6 +9,8 @@ using ImageCircle.Forms.Plugin.Droid;
 using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
+using Xamarin.Auth;
+using Xamarin.Forms;
 
 namespace DentalAssistantXF.Droid
 {
@@ -32,11 +34,15 @@ namespace DentalAssistantXF.Droid
 
             CircleViewRenderer.Initialize();
 
+            Forms.SetFlags("FastRenderers_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             UserDialogs.Init(this);
             ImageCircleRenderer.Init();
-            
+
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
+            CustomTabsConfiguration.CustomTabsClosingMessage = null;
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 

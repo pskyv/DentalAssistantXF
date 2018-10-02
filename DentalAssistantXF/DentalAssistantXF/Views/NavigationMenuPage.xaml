@@ -3,6 +3,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+                  xmlns:imgCircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
                   prism:ViewModelLocator.AutowireViewModel="True"
                   x:Class="DentalAssistantXF.Views.NavigationMenuPage">
 
@@ -12,7 +13,7 @@
                 <ContentPage NavigationPage.HasNavigationBar="False">
                     <StackLayout BackgroundColor="White">
                         <StackLayout Padding="10,20" Orientation="Horizontal" BackgroundColor="{StaticResource primaryDark}">
-                            <Image Source="ic_dental_logo" HorizontalOptions="Start" WidthRequest="60" HeightRequest="60" />
+                            <imgCircle:CircleImage Source="tooth" HorizontalOptions="Start" Aspect="Fill" WidthRequest="80" HeightRequest="80" />
                             <Label Text="Dentist Assist" FontSize="Large" TextColor="White" VerticalOptions="Center" />
                         </StackLayout>
 

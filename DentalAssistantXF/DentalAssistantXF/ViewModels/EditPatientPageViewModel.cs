@@ -54,6 +54,12 @@ namespace DentalAssistantXF.ViewModels
 
         private async void SavePatientAsync()
         {
+            if(string.IsNullOrWhiteSpace(Patient.FullName))
+            {
+                HelperFunctions.ShowToastMessage(ToastMessageType.Error, "Patient's name cannot be empty");
+                return;
+            }
+
             try
             {
                 if (Patient.Id > 0)

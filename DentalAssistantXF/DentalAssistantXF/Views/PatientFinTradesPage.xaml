@@ -46,6 +46,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Icon="ic_delete_white_24dp" 
+                                      IsDestructive="True" 
+                                      Command="{Binding BindingContext.DeleteFinTradeCommand, Source={x:Reference PatientFinancialData}}" 
+                                      CommandParameter="{Binding .}" />
+                        </ViewCell.ContextActions>
                         <Grid Padding="20,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

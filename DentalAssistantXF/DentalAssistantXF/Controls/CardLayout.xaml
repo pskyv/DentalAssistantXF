@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="DentalAssistantXF.Controls.CardLayout"
+       x:Name="this"
+       Padding="0">
+
+    <Grid ColumnSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <BoxView Color="{Binding VLineColor, Source={x:Reference this}}" WidthRequest="4" Margin="0" />
+
+        <Grid Grid.Column="1" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Icon & Title -->
+            <StackLayout x:Name="HeaderContainer" Padding="10,5" BackgroundColor="{Binding HeaderBackgroundColor, Source={x:Reference this}}">
+                <Grid x:Name="IconTitleGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="imgIcon" 
+                           Source="{Binding Icon, Source={x:Reference this}}" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center" 
+                           Aspect="AspectFit" />
+
+                    <Label x:Name="lblTitle" 
+                           Grid.Column="1" 
+                           Text="{Binding Title, Source={x:Reference this}}" 
+                           Style="{Binding TitleStyle, Source={x:Reference this}}" 
+                           HorizontalTextAlignment="Start" 
+                           VerticalTextAlignment="Center" 
+                           VerticalOptions="Center" />
+                </Grid>
+            </StackLayout>
+
+            <!-- Content -->
+            <ContentPresenter x:Name="contentView"
+                              Grid.Row="1" 
+                              Content="{Binding CardContent, Source={x:Reference this}}"/>
+
+            <!-- Action Items -->
+            <ContentPresenter x:Name="actionView" 
+                              Grid.Row="2" 
+                              Content="{Binding ActionView, Source={x:Reference this}}"
+                              Padding="10,0,2,0"/>
+
+        </Grid>
+    </Grid>
+
+</Frame>

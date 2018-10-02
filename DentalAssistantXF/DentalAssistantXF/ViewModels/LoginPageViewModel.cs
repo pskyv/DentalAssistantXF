@@ -1,4 +1,5 @@
 ﻿using DentalAssistantXF.Models;
+using DentalAssistantXF.Services;
 using DentalAssistantXF.Utils;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -15,15 +16,23 @@ namespace DentalAssistantXF.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
+        private readonly IAuthenticationService _authenticationService;
         private string _password;
         private bool _canLogin;
         private bool _isChecking;
+        private bool _hasConnection;
 
-        public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
+        public LoginPageViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IPageDialogService pageDialogService)
         {
             _navigationService = navigationService;
+            _authenticationService = authenticationService;
             _pageDialogService = pageDialogService;
-        }
+
+            Preferences.Set("IsLoggedIn", false);
+            HasConnection = !(Connectivity.NetworkAccess == NetworkAccess.None);
+            CanLogin = HasConnection;
+            Connectivity.ConnectivityChanged += OnConnectivityChanged;
+        }        
 
         public string Password
         {
@@ -47,6 +56,12 @@ namespace DentalAssistantXF.ViewModels
             set { SetProperty(ref _isChecking, value); }
         }
 
+        public bool HasConnection
+        {
+            get { return _hasConnection; }
+            set { SetProperty(ref _hasConnection, value); }
+        }
+
         public DelegateCommand LoginCommand => new DelegateCommand(LoginAsync).ObservesCanExecute(() => CanLogin);
 
         public DelegateCommand ForgotPasswordCommand => new DelegateCommand(async () =>
@@ -57,23 +72,41 @@ namespace DentalAssistantXF.ViewModels
                 SendEmailWithPassword();
             }
         });
-    
 
-        private async void LoginAsync()
+        private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            IsChecking = true;
-            //System.Threading.Thread.Sleep(5000);
+            HasConnection = !(e.NetworkAccess == NetworkAccess.None);
+            CanLogin = HasConnection;
 
-            if (string.Equals(Password, Preferences.Get("Password", "")))
-            {
-                await _navigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+            if (!HasConnection)
+            {                  
+                HelperFunctions.ShowToastMessage(ToastMessageType.Error, "There's no network connection");
             }
-            else
+        }
+
+        private void LoginAsync()
+        {
+            try
             {
-                HelperFunctions.ShowToastMessage(ToastMessageType.Error, "Invalid password");
+                _authenticationService.AuthenticateUser();
+            }
+            catch(Exception e)
+            {
+
             }
 
-            IsChecking = false;
+            //IsChecking = true;
+
+            //if (string.Equals(Password, Preferences.Get("Password", "")))
+            //{
+            //    await _navigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+            //}
+            //else
+            //{
+            //    HelperFunctions.ShowToastMessage(ToastMessageType.Error, "Invalid password");
+            //}
+
+            //IsChecking = false;
         }
 
         private async void SendEmailWithPassword()

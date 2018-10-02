@@ -18,12 +18,12 @@
         <ToolbarItem Icon="ic_check_white_24dp" Command="{Binding SavePatientFinTradeCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
+    <StackLayout CompressedLayout.IsHeadless="True">
 
-        <StackLayout Style="{StaticResource Strip}">
+        <!--<StackLayout Style="{StaticResource Strip}">
             <Label Text="Financial trade information" />
-        </StackLayout>
-        <StackLayout Padding="15,0">
+        </StackLayout>-->
+        <StackLayout Padding="15,10">
             <Picker ItemsSource="{Binding FinTradeTypes}" 
                     SelectedIndex="{Binding SelectedFinTradeType, Converter={StaticResource IntEnumConverter}, Mode=TwoWay}" />
             <DatePicker Date="{Binding PatientFinTrade.TradeDate}" Format="dd/MM/yyyy" />
