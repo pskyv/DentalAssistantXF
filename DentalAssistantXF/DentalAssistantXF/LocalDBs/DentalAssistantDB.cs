@@ -37,6 +37,11 @@ namespace XFPrismDemo.LocalDBs
             return await _connection.InsertAsync(patient);
         }
 
+        public async Task<int> SaveAllPatientsAsync(IEnumerable<Patient> patients)
+        {
+            return await _connection.InsertAllAsync(patients);
+        }
+
         public async Task<int> UpdatePatientAsync(Patient patient)
         {
             return await _connection.UpdateAsync(patient);

@@ -6,15 +6,10 @@
 
   <ItemGroup>
     <None Remove="patients.json" />
-    <None Remove="patientsList.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="patients.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="patientsList.json" />
+    <EmbeddedResource Include="patients.json" />
   </ItemGroup>
 
   <ItemGroup>
