@@ -10,13 +10,13 @@ namespace DentalAssistantXF.Views
 		{
 			InitializeComponent ();
 
-            if (DeviceInfo.Platform == "Android")
-            {
-                if (DeviceInfo.Version.Major >= 7 && DeviceInfo.Version.Minor >= 1)
-                {
-                    On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);                    
-                }
-            }
+            //if (DeviceInfo.Platform == "Android")
+            //{
+            //    if (DeviceInfo.Version.Major >= 7 && DeviceInfo.Version.Minor >= 1)
+            //    {
+            //        On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);                    
+            //    }
+            //}
 
         }
     }

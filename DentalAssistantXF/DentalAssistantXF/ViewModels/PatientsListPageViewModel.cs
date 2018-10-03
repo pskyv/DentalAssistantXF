@@ -76,25 +76,39 @@ namespace DentalAssistantXF.ViewModels
 
         private async void GetPatientsAsync()
         {
-            //FilterText = string.Empty;
+            //FilterText = string.Empty;                         
             IsLoading = true;
             _patients.Clear();
-            _patients = (await _databaseService.DentalAssistantDB.GetPatientsAsync()).ToList();
-            Patients.Clear();
-            foreach (var patient in _patients)
+            try
             {
-                patient.HasOpenCase = await _databaseService.DentalAssistantDB.HasOpenCasesAsync(patient.Id);
-                Patients.Add(patient);
+                _patients = (await _databaseService.DentalAssistantDB.GetPatientsAsync()).ToList();
+
+                Patients.Clear();
+                foreach (var patient in _patients)
+                {
+                    patient.HasOpenCase = await _databaseService.DentalAssistantDB.HasOpenCasesAsync(patient.Id);
+                    Patients.Add(patient);
+                }
+
+
+                //Get patients only on first appearance
+                MessagingCenter.Unsubscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg);
+
+                //To be removed in production
+                if (Patients.Count == 0)
+                {
+                    GetPatients();
+                }
+                ///////////////////////
             }
-
-            //Get patients only on first appearance
-            MessagingCenter.Unsubscribe<PatientsListPage>(this, Constants.OnPatientsListPageAppearingMsg);
-
-            if (Patients.Count == 0)
+            catch (Exception e)
             {
-                GetPatients();
+                HelperFunctions.ShowToastMessage(ToastMessageType.Error, e.Message);
             }
-            IsLoading = false;
+            finally
+            {
+                IsLoading = false;
+            }            
         }
 
         private async void NavigateToPatientDetailsAsync()

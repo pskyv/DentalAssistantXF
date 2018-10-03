@@ -15,6 +15,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <cv:BooleanToImageConverter x:Key="BooleanToImageConverter" />
+            <cv:NotBooleanConverter x:Key="InvertBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -24,14 +25,21 @@
                 <behaviors:EventToCommandBehavior EventName="SearchButtonPressed" Command="{Binding FilterPatientsCommand}"/>
             </SearchBar.Behaviors>
         </SearchBar>
+        
+        <ActivityIndicator Color="{StaticResource accent}"
+                           IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           Margin="0,50" />
 
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ListView SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
-                  ItemsSource="{Binding Patients}"
-                  RowHeight="60"
-                  Margin="0,15,0,0"
-                  AbsoluteLayout.LayoutFlags="All"
-			      AbsoluteLayout.LayoutBounds="0,0,1,1">
+                      ItemsSource="{Binding Patients}"
+                      RowHeight="60"
+                      Margin="0,15,0,0"
+                      IsVisible="{Binding IsLoading, Converter={StaticResource InvertBooleanConverter}}"
+                      AbsoluteLayout.LayoutFlags="All"
+			          AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <ListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding NavigateToPatientDetailsCommand}"/>
                 </ListView.Behaviors>
