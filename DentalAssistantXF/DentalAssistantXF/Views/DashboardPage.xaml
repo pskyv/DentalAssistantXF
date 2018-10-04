@@ -24,7 +24,7 @@
 
                     <Grid VerticalOptions="Center">
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
+                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
                         </StackLayout>
                         <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Text="{Binding BindingContext.TotalOpen, Source={x:Reference Dashboard}}" TextColor="White" FontAttributes="Bold" FontSize="18" />
@@ -62,7 +62,7 @@
                     
                     <Grid VerticalOptions="Center">
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
+                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
                         </StackLayout>
                         <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Text="{Binding BindingContext.TotalDebt, Source={x:Reference Dashboard}}" TextColor="White" FontAttributes="Bold" FontSize="18" />
@@ -105,7 +105,7 @@
 
                     <Grid VerticalOptions="Center">
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                            <badge:CircleView CornerRadius="35" BackgroundColor="{StaticResource primary}" HeightRequest="70" WidthRequest="70" />
+                            <badge:CircleView CornerRadius="40" BackgroundColor="{StaticResource primary}" HeightRequest="80" WidthRequest="80" />
                         </StackLayout>
                         <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Text="{Binding BindingContext.NextAppointment.AppointmentDate, Source={x:Reference Dashboard}, StringFormat='{}{0:d/M/yy}'}" TextColor="White" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center" />

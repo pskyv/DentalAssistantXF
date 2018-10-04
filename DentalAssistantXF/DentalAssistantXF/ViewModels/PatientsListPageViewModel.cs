@@ -128,19 +128,17 @@ namespace DentalAssistantXF.ViewModels
                 return;
             }
 
-            _patients = Patients.Where(p => p.FullName.StartsWith(FilterText, true, null)).ToList();
+            var patients = _patients.Where(p => p.FullName.StartsWith(FilterText, true, null)).ToList();
             Patients.Clear();
-            foreach (var patient in _patients)
-            {
-                Patients.Add(patient);
-            }
+            patients.ForEach(Patients.Add);
         }
 
         private void CheckIfCleared()
         {
             if (string.IsNullOrEmpty(FilterText))
             {
-                GetPatientsAsync();
+                Patients.Clear();
+                _patients.ForEach(Patients.Add);
             }
         }
 

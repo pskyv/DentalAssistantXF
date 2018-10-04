@@ -35,7 +35,7 @@ namespace DentalAssistantXF.ViewModels
             MessagingCenter.Subscribe<EditPatientHistoryPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadOpenProceduresDataAsync(); });
             MessagingCenter.Subscribe<EditAppointmentPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadSchedulerDataAsync(); });
             MessagingCenter.Subscribe<AppointmentsListPageViewModel>(this, Constants.OnDashboardDataChangeMsg, (sender) => { LoadSchedulerDataAsync(); });
-        }        
+        }
 
         public decimal TotalDebt
         {

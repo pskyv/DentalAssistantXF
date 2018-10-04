@@ -20,7 +20,7 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <SearchBar Placeholder="Search for patient..." Text="{Binding FilterText}" >
+        <SearchBar Placeholder="Search for patient..." Text="{Binding FilterText}">
             <SearchBar.Behaviors>
                 <behaviors:EventToCommandBehavior EventName="SearchButtonPressed" Command="{Binding FilterPatientsCommand}"/>
             </SearchBar.Behaviors>
@@ -30,14 +30,15 @@
                            IsVisible="{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}" 
                            HorizontalOptions="Center" 
-                           Margin="0,50" />
+                           Margin="0,100" />
 
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ListView SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
                       ItemsSource="{Binding Patients}"
+                      CachingStrategy="RecycleElement"
                       RowHeight="60"
                       Margin="0,15,0,0"
-                      IsVisible="{Binding IsLoading, Converter={StaticResource InvertBooleanConverter}}"
+                      IsVisible="{Binding IsLoading, Converter={StaticResource InvertBooleanConverter}}"                      
                       AbsoluteLayout.LayoutFlags="All"
 			          AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <ListView.Behaviors>
