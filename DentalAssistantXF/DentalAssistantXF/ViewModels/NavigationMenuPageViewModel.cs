@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace DentalAssistantXF.ViewModels
 {
@@ -28,13 +29,27 @@ namespace DentalAssistantXF.ViewModels
             set { SetProperty(ref _selectedNavItem, value); }
         }
 
+        public bool IsLoggedIn
+        {
+            get { return Preferences.Get("LoginWithPass", false); }
+        }
+
         public ObservableCollection<NavigationMenuItem> NavItems { get; set; }
 
-        public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
+        public DelegateCommand NavigateCommand => new DelegateCommand(NavigateAsync);
 
-        private async void Navigate()
+        public DelegateCommand LogoutCommand => new DelegateCommand(LogoutAsync);        
+
+        private async void NavigateAsync()
         {
             await _navigationService.NavigateAsync("NavigationPage/" + SelectedNaviItem.Page);
+        }
+
+        private async void LogoutAsync()
+        {
+            Preferences.Set("IsLoggedIn", false);
+            Preferences.Remove("ExpiryDate");
+            await _navigationService.NavigateAsync("myApp:///NavigationMenuPage/NavigationPage/LoginPage");
         }
 
         private void InitNavItems()

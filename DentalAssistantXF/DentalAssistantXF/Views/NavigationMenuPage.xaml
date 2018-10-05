@@ -40,6 +40,16 @@
                             </ListView.ItemTemplate>
                         </ListView>
 
+                        <StackLayout VerticalOptions="EndAndExpand" IsVisible="{Binding IsLoggedIn}">
+                            <BoxView Color="#eeeeee" HeightRequest="0.5" />
+                            <Button Image="ic_logout_black_24dp" 
+                                    Text="Logout" 
+                                    TextColor="{StaticResource primaryDark}" 
+                                    BackgroundColor="Transparent" 
+                                    HorizontalOptions="Start"
+                                    Command="{Binding LogoutCommand}"/>
+                        </StackLayout>
+
                     </StackLayout>
                 </ContentPage>
             </x:Arguments>
