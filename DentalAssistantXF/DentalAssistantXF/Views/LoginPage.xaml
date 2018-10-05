@@ -4,7 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:material="clr-namespace:SuaveControls.MaterialForms;assembly=SuaveControls.MaterialForms"
-             x:Class="DentalAssistantXF.Views.LoginPage">
+             x:Class="DentalAssistantXF.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -20,6 +20,8 @@ namespace DentalAssistantXF.Utils
 
         public const string TeethNumbersMsg = "TeethNumbersMsg";
 
+        public const string OnNavigatingFromLoginPageMsg = "OnNavigatingFromLoginPageMsg";
+
         public const string clientId = "545733309505-rs344lvdbog7ao56v9p2rj3p7cjkavjt.apps.googleusercontent.com";
         public const string scope = "https://www.googleapis.com/auth/userinfo.email";
         public const string redirectUri = "com.googleusercontent.apps.545733309505-rs344lvdbog7ao56v9p2rj3p7cjkavjt:/oauth2redirect";

@@ -33,7 +33,7 @@ namespace DentalAssistantXF
 
             if (!Preferences.Get("LoginWithPass", false))
             {
-                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");                
+                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
             }
             else
             {
@@ -43,7 +43,7 @@ namespace DentalAssistantXF
                 }
                 else
                 {
-                    await NavigationService.NavigateAsync("LoginPage");
+                    await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/LoginPage");
                 }
             }
         }
