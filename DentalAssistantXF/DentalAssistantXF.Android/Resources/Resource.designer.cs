@@ -9956,6 +9956,9 @@ namespace DentalAssistantXF.Droid
 			// aapt resource value: 0x7f0d0192
 			public const int AppCompatDialogStyle = 2131558802;
 			
+			// aapt resource value: 0x7f0d0193
+			public const int AppToolbarTheme = 2131558803;
+			
 			// aapt resource value: 0x7f0d00a9
 			public const int Base_AlertDialog_AppCompat = 2131558569;
 			
