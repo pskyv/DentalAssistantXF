@@ -64,7 +64,7 @@ namespace DentalAssistantXF.Services
 
         private async Task NavigateToPageAsync()
         {
-            await _navigationService.NavigateAsync("MainPage");
+            await _navigationService.NavigateAsync("../MainPage");
         }
 
         private void OnAuthenticatorError(object sender, AuthenticatorErrorEventArgs e)

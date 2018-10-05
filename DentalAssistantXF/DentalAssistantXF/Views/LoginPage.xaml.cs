@@ -3,21 +3,11 @@ using Xamarin.Forms;
 
 namespace DentalAssistantXF.Views
 {
-    public partial class LoginPage : ContentPage, INavigatedAware
+    public partial class LoginPage : ContentPage
     {
         public LoginPage()
         {
             InitializeComponent();
-        }
-
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-            Navigation.RemovePage(this);
-        }
-
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-            
         }
     }
 }

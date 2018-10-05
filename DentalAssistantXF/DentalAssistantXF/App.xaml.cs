@@ -37,7 +37,7 @@ namespace DentalAssistantXF
             }
             else
             {
-                if (Preferences.Get("IsLoggedIn", false) && DateTime.Now < Preferences.Get("ExpiryDate", DateTime.Now))
+                if (Preferences.Get("IsLoggedIn", false) && DateTime.Now < Preferences.Get("ExpiryDate", DateTime.Now.AddDays(-1)))
                 {
                     await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
                 }
