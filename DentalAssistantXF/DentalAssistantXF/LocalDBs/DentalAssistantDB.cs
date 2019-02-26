@@ -27,6 +27,11 @@ namespace XFPrismDemo.LocalDBs
             return patients.OrderBy(p => p.LastName);
         }
 
+        public async Task<List<Patient>>GetMatchingPatientsAsync(string filterText)
+        {
+            return await _connection.Table<Patient>().Where(p => p.FullName.StartsWith(filterText, StringComparison.CurrentCultureIgnoreCase)).ToListAsync();
+        }
+
         public async Task<Patient> GetPatientAsync(int id)
         {
             return await _connection.GetAsync<Patient>(id); //QueryAsync<Patient>("select * from Patient where Id =?", id);            

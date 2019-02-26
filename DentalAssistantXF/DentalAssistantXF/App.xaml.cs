@@ -8,6 +8,7 @@ using Prism.Unity;
 using DentalAssistantXF.Services;
 using Xamarin.Essentials;
 using System;
+using DentalAssistantXF.Utils;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DentalAssistantXF
@@ -28,6 +29,8 @@ namespace DentalAssistantXF
 #if DEBUG
             LiveReload.Init();
 #endif
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Constants.SyncfusionLicenseKey);
 
             InitializeComponent();
 

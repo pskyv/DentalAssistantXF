@@ -4,6 +4,7 @@ using DentalAssistantXF.Utils;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Syncfusion.SfAutoComplete.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,10 @@ namespace DentalAssistantXF.ViewModels
         private Appointment _appointment;
         private Patient _selectedPatient;
         private Patient _tempPatient;
+        private List<Patient> _patients;
         private string _title;
+        private string _filterText;
+        private SuggestionBoxPlacement _isSuggestionListOpen;
 
         public EditAppointmentPageViewModel(IDatabaseService databaseService)
         {
@@ -26,6 +30,7 @@ namespace DentalAssistantXF.ViewModels
 
             SaveAppointmentCommand = new DelegateCommand(SaveAppointment);
             Patients = new ObservableCollection<Patient>();
+            IsSuggestionListOpen = SuggestionBoxPlacement.None;
         }        
 
         public Appointment Appointment
@@ -44,6 +49,31 @@ namespace DentalAssistantXF.ViewModels
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }        
+
+        public string FilterText
+        {
+            get { return _filterText; }
+            set
+            {
+                SetProperty(ref _filterText, value);
+                if (FilterText != null)
+                {
+                    IsSuggestionListOpen = FilterText.Length < 3 ? SuggestionBoxPlacement.None : SuggestionBoxPlacement.Bottom;
+                }
+                FilterPatients();
+            }
+        }
+
+        public Func<string, ICollection<string>, ICollection<string>> SortingAlgorithm { get; } = (text, values) => values
+        .Where(x => x.ToLower().StartsWith(text.ToLower()))
+        .OrderBy(x => x)
+        .ToList();
+
+        public SuggestionBoxPlacement IsSuggestionListOpen
+        {
+            get { return _isSuggestionListOpen; }
+            set { SetProperty(ref _isSuggestionListOpen, value); }
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)
@@ -58,9 +88,10 @@ namespace DentalAssistantXF.ViewModels
                 if (parameters["Patient"] != null)
                 {
                     _tempPatient = (Patient)parameters["Patient"];
-                }
-
-                GetPatientsAsync();
+                    Patients.Add(_tempPatient);
+                    SelectedPatient = Patients.Where(p => p.Id == _tempPatient.Id).FirstOrDefault();
+                    FilterText = SelectedPatient.FullName;
+                }                
             }            
         }        
 
@@ -68,11 +99,33 @@ namespace DentalAssistantXF.ViewModels
 
         public DelegateCommand SaveAppointmentCommand { get; }
 
-        private async void GetPatientsAsync()
+        private async void FilterPatients()
         {
-            var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
+            if (string.IsNullOrEmpty(FilterText) || FilterText.Length < 3)
+            {
+                SelectedPatient = null;
+                Patients.Clear();
+                return;
+            }
+
+            if (SelectedPatient != null)
+            {
+                return;
+            }
+
             Patients.Clear();
-            patients.ToList().ForEach(Patients.Add);
+            //var patients = _patients.Where(p => p.FullName.StartsWith(FilterText, StringComparison.CurrentCultureIgnoreCase));
+            var patients = await _databaseService.DentalAssistantDB.GetMatchingPatientsAsync(FilterText);
+            patients.ForEach(Patients.Add);
+        }
+
+        private async void GetPatientAsync()
+        {
+            //var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
+            //_patients = patients.ToList();
+            //Patients.Clear();
+            //patients.ToList().ForEach(Patients.Add);
+            var patient = await _databaseService.DentalAssistantDB.GetPatientAsync(_tempPatient.Id);
             if (_tempPatient != null)
             {
                 SelectedPatient = Patients.Where(p => p.Id == _tempPatient.Id).FirstOrDefault();

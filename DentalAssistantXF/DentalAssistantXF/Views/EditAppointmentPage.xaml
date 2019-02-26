@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:material="clr-namespace:SuaveControls.MaterialForms;assembly=SuaveControls.MaterialForms"
+             xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
+             xmlns:syncf="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DentalAssistantXF.Views.EditAppointmentPage"
@@ -18,11 +20,25 @@
         </StackLayout>
         
         <StackLayout Padding="15,0">
-            <Picker Title="Select patient..." 
+            <!--<Picker Title="Select patient..." 
                     ItemsSource="{Binding Patients}"
                     ItemDisplayBinding="{Binding FullName}"
-                    SelectedItem="{Binding SelectedPatient, Mode=TwoWay}" />
-            
+                    SelectedItem="{Binding SelectedPatient, Mode=TwoWay}" />-->
+            <!--<xfx:XfxComboBox Placeholder="Search for patient..."
+                             Text="{Binding FilterText, Mode=TwoWay}"
+                             ItemsSource="{Binding Patients}"
+                             SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
+                             SortingAlgorithm="{Binding SortingAlgorithm}" />-->
+            <syncf:SfAutoComplete HeightRequest="40" 
+                                  Text="{Binding FilterText, Mode=TwoWay}" 
+                                  Watermark="Search for patient..."
+                                  DataSource="{Binding Patients}"
+                                  SuggestionMode="StartsWith"
+                                  DisplayMemberPath="FullName"
+                                  SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
+                                  SuggestionBoxPlacement="{Binding IsSuggestionListOpen, Mode=TwoWay}"
+                                  NoResultsFoundText="No results found" />
+
             <DatePicker Date="{Binding Appointment.AppointmentDate}" Format="dd/MM/yyyy" />
             
             <TimePicker Time="{Binding Appointment.AppointmentTime}" Format="HH:mm" />

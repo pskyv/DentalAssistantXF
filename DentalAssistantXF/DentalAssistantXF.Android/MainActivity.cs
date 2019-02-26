@@ -11,6 +11,7 @@ using Prism;
 using Prism.Ioc;
 using Xamarin.Auth;
 using Xamarin.Forms;
+using Xfx;
 
 namespace DentalAssistantXF.Droid
 {
@@ -33,6 +34,8 @@ namespace DentalAssistantXF.Droid
             //CrossCurrentActivity.Current.Activity = this;
 
             CircleViewRenderer.Initialize();
+
+            XfxControls.Init();
 
             Forms.SetFlags("FastRenderers_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
