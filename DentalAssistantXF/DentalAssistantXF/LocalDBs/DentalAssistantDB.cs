@@ -29,7 +29,14 @@ namespace XFPrismDemo.LocalDBs
 
         public async Task<List<Patient>>GetMatchingPatientsAsync(string filterText)
         {
-            return await _connection.Table<Patient>().Where(p => p.FullName.StartsWith(filterText, StringComparison.CurrentCultureIgnoreCase)).ToListAsync();
+            try
+            {
+                return await _connection.Table<Patient>().Where(p => p.LastName.StartsWith(filterText, StringComparison.CurrentCultureIgnoreCase)).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<Patient> GetPatientAsync(int id)

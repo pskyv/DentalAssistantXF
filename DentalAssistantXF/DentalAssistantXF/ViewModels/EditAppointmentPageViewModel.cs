@@ -108,28 +108,14 @@ namespace DentalAssistantXF.ViewModels
                 return;
             }
 
-            if (SelectedPatient != null)
+            if (Patients.Count > 0 || SelectedPatient != null)
             {
                 return;
             }
 
             Patients.Clear();
-            //var patients = _patients.Where(p => p.FullName.StartsWith(FilterText, StringComparison.CurrentCultureIgnoreCase));
             var patients = await _databaseService.DentalAssistantDB.GetMatchingPatientsAsync(FilterText);
             patients.ForEach(Patients.Add);
-        }
-
-        private async void GetPatientAsync()
-        {
-            //var patients = await _databaseService.DentalAssistantDB.GetPatientsAsync();
-            //_patients = patients.ToList();
-            //Patients.Clear();
-            //patients.ToList().ForEach(Patients.Add);
-            var patient = await _databaseService.DentalAssistantDB.GetPatientAsync(_tempPatient.Id);
-            if (_tempPatient != null)
-            {
-                SelectedPatient = Patients.Where(p => p.Id == _tempPatient.Id).FirstOrDefault();
-            }
         }
 
         private async void SaveAppointment()
