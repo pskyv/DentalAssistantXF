@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="DentalAssistantXF.Views.TimelineTestPage" 
+             Padding="20">
+
+    <ListView HasUnevenRows="True" 
+              ItemsSource="{Binding Items}"
+              SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid ColumnSpacing="0" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding TaskDate, StringFormat='{}{0:d/M/yy H:mm}'}" />
+                        <Label Grid.Row="1" Text="{Binding NurseName}" />
+
+                        <BoxView Grid.RowSpan="3"
+                                 Grid.Column="1"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Fill"
+                                 WidthRequest="3"
+                                 BackgroundColor="{StaticResource primary}" />
+                        <Image Grid.RowSpan="2" Grid.Column="1" 
+                               Source="ic_openCase"
+                               VerticalOptions="Center"/>
+
+                        <Frame Grid.RowSpan="2"
+                               Grid.Column="2"
+                               HasShadow="True"
+                               CornerRadius="15"
+                               HeightRequest="50"                                
+                               BorderColor="{StaticResource primary}"
+                               Margin="10,0,0,0"
+                               Padding="10,5">
+                            <Label Text="{Binding TaskDescription}" />
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

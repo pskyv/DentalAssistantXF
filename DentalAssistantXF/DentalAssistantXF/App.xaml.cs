@@ -36,7 +36,7 @@ namespace DentalAssistantXF
 
             if (!Preferences.Get("LoginWithPass", false))
             {
-                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/MainPage");
+                await NavigationService.NavigateAsync("NavigationMenuPage/NavigationPage/TimelineTestPage");
             }
             else
             {
@@ -73,6 +73,8 @@ namespace DentalAssistantXF
             containerRegistry.RegisterSingleton(typeof(IDatabaseService), typeof(DatabaseService));
             containerRegistry.RegisterSingleton(typeof(IAuthenticationService), typeof(AuthenticationService));
             containerRegistry.RegisterForNavigation<DenturePage>();
+
+            containerRegistry.RegisterForNavigation<TimelineTestPage, TimelineTestPageViewModel>();
         }
     }
 }
